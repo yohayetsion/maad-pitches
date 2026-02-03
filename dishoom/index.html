@@ -1,0 +1,1264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dishoom | Brand Strategy Review — Maad House</title>
+  <link rel="icon" type="image/png" href="https://www.google.com/s2/favicons?domain=dishoom.com&sz=64">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    /* Core Styles */
+    :root {
+      --mh-black: #1a1a1a;
+      --mh-white: #ffffff;
+      --mh-accent: #e63946;
+      --mh-gray-light: #f8f9fa;
+      --mh-gray-medium: #6c757d;
+      --mh-gray-dark: #343a40;
+
+      /* Dishoom brand colors */
+      --client-cream: #FEFFED;
+      --client-burgundy: #7C1D1D;
+      --client-dark: #1A1A1A;
+      --client-gold: #B8860B;
+
+      --font-heading: 'Playfair Display', Georgia, serif;
+      --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      --slide-padding: 50px;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html, body {
+      height: 100%;
+      font-family: var(--font-body);
+      font-size: 16px;
+      line-height: 1.6;
+      color: var(--mh-black);
+      background: var(--mh-white);
+      overflow: hidden;
+    }
+
+    .deck {
+      width: 100vw;
+      height: 100vh;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .slide {
+      width: 100vw;
+      height: 100vh;
+      padding: var(--slide-padding);
+      display: none;
+      flex-direction: column;
+      position: absolute;
+      top: 0;
+      left: 0;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      overflow-y: auto;
+    }
+
+    .slide.active {
+      display: flex;
+      opacity: 1;
+    }
+
+    /* Slide Types */
+    .slide--title {
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      background: var(--client-cream);
+      color: var(--client-dark);
+    }
+
+    .slide--content {
+      justify-content: flex-start;
+      padding-top: 60px;
+    }
+
+    .slide--dark {
+      background: var(--client-dark);
+      color: var(--client-cream);
+    }
+
+    .slide--accent {
+      background: var(--client-burgundy);
+      color: var(--client-cream);
+      justify-content: center;
+      align-items: center;
+    }
+
+    .slide--client {
+      background: var(--client-dark);
+      color: var(--client-cream);
+    }
+
+    /* Typography */
+    h1 {
+      font-family: var(--font-heading);
+      font-size: 3.5rem;
+      font-weight: 500;
+      line-height: 1.1;
+      margin-bottom: 1rem;
+      letter-spacing: 0.02em;
+    }
+
+    h2 {
+      font-family: var(--font-heading);
+      font-size: 2rem;
+      font-weight: 500;
+      line-height: 1.2;
+      margin-bottom: 1rem;
+    }
+
+    h3 {
+      font-size: 1.35rem;
+      font-weight: 600;
+      margin-bottom: 0.75rem;
+    }
+
+    h4 {
+      font-size: 0.85rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      color: var(--mh-gray-medium);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    p {
+      font-size: 1rem;
+      margin-bottom: 0.75rem;
+      max-width: 800px;
+    }
+
+    .subtitle {
+      font-size: 1.1rem;
+      color: var(--mh-gray-medium);
+      font-weight: 400;
+      margin-bottom: 1.5rem;
+    }
+
+    .slide--title .subtitle,
+    .slide--dark .subtitle,
+    .slide--client .subtitle {
+      color: rgba(30,26,26,0.7);
+    }
+
+    .slide--dark .subtitle,
+    .slide--client .subtitle,
+    .slide--accent .subtitle {
+      color: rgba(254,255,237,0.7);
+    }
+
+    ul { margin-left: 1.25rem; margin-bottom: 0.75rem; }
+    li { font-size: 1rem; margin-bottom: 0.35rem; }
+
+    /* Brand Identity Layout - Two Column with Screenshot */
+    .brand-identity-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      height: calc(100vh - 200px);
+      align-items: start;
+    }
+
+    .brand-identity-left {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .brand-identity-right {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    /* Compact Brand Cards */
+    .brand-card-compact {
+      background: var(--mh-gray-light);
+      border-radius: 10px;
+      padding: 16px 20px;
+    }
+
+    .brand-card-compact h4 {
+      font-size: 0.7rem;
+      margin-bottom: 8px;
+    }
+
+    .brand-card-compact p {
+      font-size: 0.9rem;
+      margin-bottom: 0;
+      line-height: 1.5;
+    }
+
+    /* Color Swatches - Compact */
+    .color-swatches {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .color-swatch {
+      width: 36px;
+      height: 36px;
+      border-radius: 6px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.15);
+      position: relative;
+    }
+
+    .color-swatch span {
+      position: absolute;
+      bottom: -16px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 0.55rem;
+      color: var(--mh-gray-medium);
+      white-space: nowrap;
+    }
+
+    /* Screenshot in Identity Slide */
+    .screenshot-small {
+      border-radius: 8px;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+      width: 100%;
+      max-height: 280px;
+      object-fit: cover;
+      object-position: top;
+    }
+
+    .screenshot-wrapper {
+      position: relative;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    .screenshot-label {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: rgba(0,0,0,0.7);
+      color: white;
+      padding: 8px 12px;
+      font-size: 0.75rem;
+    }
+
+    /* Market Context Bullets */
+    .market-bullets {
+      background: var(--mh-gray-light);
+      border-radius: 10px;
+      padding: 16px 20px;
+    }
+
+    .market-bullets h4 {
+      font-size: 0.7rem;
+      margin-bottom: 10px;
+    }
+
+    .market-bullets ul {
+      margin: 0;
+      padding-left: 1rem;
+    }
+
+    .market-bullets li {
+      font-size: 0.85rem;
+      margin-bottom: 6px;
+    }
+
+    /* Two Column - Strengths/Opportunities */
+    .two-column {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      margin-top: 1.5rem;
+    }
+
+    .column h4 { margin-bottom: 0.75rem; font-size: 0.9rem; }
+    .column.strengths h4 { color: #2ecc71; }
+    .column.opportunities h4 { color: var(--mh-accent); }
+
+    /* Competitor Grid */
+    .competitor-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      margin-top: 1.5rem;
+    }
+
+    .competitor-card {
+      background: var(--mh-gray-light);
+      border-radius: 10px;
+      padding: 18px;
+    }
+
+    .competitor-card h4 {
+      color: var(--mh-black);
+      font-size: 1rem;
+      text-transform: none;
+      letter-spacing: 0;
+      margin-bottom: 4px;
+    }
+
+    .competitor-card .positioning {
+      font-style: italic;
+      color: var(--mh-gray-medium);
+      font-size: 0.85rem;
+      margin-bottom: 10px;
+    }
+
+    .competitor-card p {
+      font-size: 0.85rem;
+      color: var(--mh-gray-dark);
+      margin-bottom: 0;
+      line-height: 1.5;
+    }
+
+    /* Alternative/Direction Cards */
+    .alternative-number {
+      font-size: 0.75rem;
+      color: var(--mh-gray-medium);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 8px;
+    }
+
+    .positioning-quote {
+      font-family: var(--font-heading);
+      font-style: italic;
+      color: var(--mh-gray-medium);
+      font-size: 1.15rem;
+      margin-bottom: 0.75rem;
+    }
+
+    /* Logo Grid */
+    .logo-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 14px;
+      margin: 1.25rem 0;
+    }
+
+    .logo-option {
+      background: var(--client-cream);
+      border-radius: 10px;
+      padding: 14px;
+      aspect-ratio: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+      border: 1px solid rgba(124,29,29,0.1);
+    }
+
+    .logo-option img {
+      max-width: 90%;
+      max-height: 90%;
+      object-fit: contain;
+    }
+
+    /* Brand Grid for Direction slides */
+    .brand-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+      margin-top: 1rem;
+    }
+
+    .brand-card {
+      background: var(--mh-gray-light);
+      border-radius: 10px;
+      padding: 18px;
+    }
+
+    .brand-card h4 {
+      font-size: 0.7rem;
+      margin-bottom: 10px;
+    }
+
+    .brand-card p {
+      font-size: 0.9rem;
+      margin-bottom: 0;
+    }
+
+    /* Hero Mockup - Full Width */
+    .hero-mockup-container {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 1rem 0;
+    }
+
+    .hero-mockup {
+      border-radius: 12px;
+      box-shadow: 0 8px 40px rgba(0,0,0,0.2);
+      max-width: 100%;
+      max-height: calc(100vh - 220px);
+      object-fit: contain;
+    }
+
+    /* Before/After Split Layout */
+    .before-after-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      flex: 1;
+      align-items: start;
+      margin-top: 1rem;
+    }
+
+    .before-section, .after-section {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .section-label {
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--mh-gray-medium);
+      margin-bottom: 4px;
+    }
+
+    .section-label.before { color: var(--mh-accent); }
+    .section-label.after { color: #2ecc71; }
+
+    /* Annotated Screenshot */
+    .annotated-screenshot {
+      position: relative;
+      border-radius: 8px;
+      overflow: visible;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.12);
+    }
+
+    .annotated-screenshot img {
+      width: 100%;
+      border-radius: 8px;
+      display: block;
+    }
+
+    .annotation {
+      position: absolute;
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      font-size: 0.75rem;
+      color: var(--mh-accent);
+      font-weight: 500;
+      max-width: 180px;
+    }
+
+    .annotation-number {
+      width: 22px;
+      height: 22px;
+      background: var(--mh-accent);
+      color: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.7rem;
+      font-weight: 700;
+      flex-shrink: 0;
+      box-shadow: 0 2px 6px rgba(230, 57, 70, 0.4);
+    }
+
+    .annotation-text {
+      background: white;
+      padding: 6px 10px;
+      border-radius: 6px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+      line-height: 1.4;
+    }
+
+    /* Wireframe */
+    .wireframe {
+      background: var(--client-cream);
+      border-radius: 8px;
+      padding: 20px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.12);
+      min-height: 300px;
+      border: 2px solid var(--client-burgundy);
+    }
+
+    .wireframe-row {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 12px;
+      align-items: center;
+    }
+
+    .wireframe-row.nav {
+      justify-content: space-between;
+      padding-bottom: 12px;
+      border-bottom: 1px solid rgba(124,29,29,0.2);
+      margin-bottom: 20px;
+    }
+
+    .wireframe-logo {
+      background: var(--client-burgundy);
+      color: var(--client-cream);
+      padding: 6px 12px;
+      border-radius: 4px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      font-family: var(--font-heading);
+      letter-spacing: 0.1em;
+    }
+
+    .wireframe-nav-items {
+      display: flex;
+      gap: 16px;
+    }
+
+    .wireframe-nav-item {
+      width: 50px;
+      height: 8px;
+      background: rgba(124,29,29,0.2);
+      border-radius: 4px;
+    }
+
+    .wireframe-hero {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      padding: 16px 0;
+    }
+
+    .wireframe-hero-left {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .wireframe-headline {
+      height: 24px;
+      background: var(--client-dark);
+      border-radius: 4px;
+      width: 90%;
+    }
+
+    .wireframe-subhead {
+      height: 12px;
+      background: rgba(26,26,26,0.3);
+      border-radius: 3px;
+      width: 70%;
+    }
+
+    .wireframe-heritage {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-top: 8px;
+      padding: 12px;
+      background: rgba(124,29,29,0.1);
+      border-radius: 6px;
+      border-left: 3px solid var(--client-burgundy);
+    }
+
+    .wireframe-heritage-label {
+      font-size: 0.6rem;
+      color: var(--client-burgundy);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      font-weight: 600;
+    }
+
+    .wireframe-heritage-text {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .wireframe-heritage-text div {
+      height: 8px;
+      background: rgba(124,29,29,0.3);
+      border-radius: 3px;
+    }
+
+    .wireframe-cta {
+      width: 120px;
+      height: 36px;
+      background: var(--client-burgundy);
+      border-radius: 6px;
+      margin-top: 8px;
+    }
+
+    .wireframe-hero-right {
+      background: rgba(124,29,29,0.08);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 160px;
+      border: 1px dashed rgba(124,29,29,0.3);
+    }
+
+    .wireframe-food-label {
+      color: var(--client-burgundy);
+      font-size: 0.65rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      opacity: 0.6;
+    }
+
+    /* Improvement callouts */
+    .improvement-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-top: 12px;
+    }
+
+    .improvement-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.8rem;
+      color: var(--mh-gray-dark);
+    }
+
+    .improvement-check {
+      width: 20px;
+      height: 20px;
+      background: #2ecc71;
+      color: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.7rem;
+      flex-shrink: 0;
+    }
+
+    @media (max-width: 1200px) {
+      .before-after-layout {
+        grid-template-columns: 1fr;
+        gap: 30px;
+      }
+      .annotation {
+        font-size: 0.65rem;
+        max-width: 140px;
+      }
+      .annotation-number {
+        width: 18px;
+        height: 18px;
+        font-size: 0.6rem;
+      }
+    }
+
+    /* CTA Styles */
+    .cta-content {
+      text-align: center;
+      max-width: 700px;
+    }
+
+    .cta-content h2 { margin-bottom: 1rem; font-size: 2.25rem; }
+
+    .cta-buttons {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      align-items: center;
+      margin-top: 2rem;
+    }
+
+    .cta-button-primary {
+      display: inline-block;
+      background: var(--client-cream);
+      color: var(--client-burgundy);
+      padding: 18px 56px;
+      border-radius: 8px;
+      font-size: 1.2rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .cta-button-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 24px rgba(0, 0, 0, 0.25);
+    }
+
+    .cta-or {
+      color: rgba(254,255,237,0.6);
+      font-size: 0.9rem;
+    }
+
+    .cta-button-secondary {
+      display: inline-block;
+      background: transparent;
+      color: var(--client-cream);
+      padding: 14px 40px;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-weight: 500;
+      text-decoration: none;
+      border: 2px solid rgba(254,255,237,0.5);
+      transition: all 0.2s ease;
+    }
+
+    .cta-button-secondary:hover {
+      background: rgba(254,255,237,0.1);
+      border-color: rgba(254,255,237,0.8);
+    }
+
+    /* Navigation */
+    .nav {
+      position: fixed;
+      bottom: 20px;
+      right: 30px;
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      z-index: 100;
+      background: rgba(255,255,255,0.92);
+      padding: 10px 18px;
+      border-radius: 30px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.12);
+    }
+
+    .nav-btn {
+      width: 36px;
+      height: 36px;
+      border: none;
+      border-radius: 50%;
+      background: var(--mh-gray-light);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s ease;
+    }
+
+    .nav-btn:hover { background: var(--client-burgundy); color: white; }
+    .nav-btn:disabled { opacity: 0.3; cursor: not-allowed; }
+
+    .slide-counter {
+      font-size: 0.875rem;
+      color: var(--mh-gray-medium);
+      min-width: 60px;
+      text-align: center;
+    }
+
+    /* Progress */
+    .progress {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 4px;
+      background: var(--client-burgundy);
+      transition: width 0.3s ease;
+      z-index: 101;
+    }
+
+    /* Prepared By */
+    .prepared-by {
+      margin-top: 2rem;
+      font-size: 0.9rem;
+      opacity: 0.7;
+    }
+
+    .prepared-by strong { opacity: 1; }
+
+    /* Client logo text */
+    .client-logo-text {
+      font-family: var(--font-heading);
+      font-size: 2.5rem;
+      font-weight: 500;
+      color: var(--client-burgundy);
+      margin-bottom: 2rem;
+      letter-spacing: 0.15em;
+    }
+
+    /* Quote block for heritage */
+    .heritage-quote {
+      font-family: var(--font-heading);
+      font-size: 1.4rem;
+      font-style: italic;
+      color: var(--client-burgundy);
+      border-left: 4px solid var(--client-gold);
+      padding-left: 1.5rem;
+      margin: 1.5rem 0;
+      max-width: 700px;
+    }
+
+    /* Responsive */
+    @media (max-width: 1200px) {
+      :root { --slide-padding: 36px; }
+      h1 { font-size: 2.5rem; }
+      h2 { font-size: 1.75rem; }
+      .brand-identity-layout { grid-template-columns: 1fr; }
+      .competitor-grid { grid-template-columns: 1fr 1fr; }
+    }
+
+    @media (max-width: 768px) {
+      :root { --slide-padding: 20px; }
+      h1 { font-size: 2rem; }
+      h2 { font-size: 1.5rem; }
+      .two-column, .competitor-grid { grid-template-columns: 1fr; }
+      .logo-grid { grid-template-columns: repeat(2, 1fr); }
+      .nav { bottom: 16px; padding: 8px 16px; }
+      .cta-buttons { gap: 12px; }
+      .cta-button-primary { padding: 14px 36px; font-size: 1rem; }
+    }
+  </style>
+</head>
+<body>
+  <div class="progress" id="progress"></div>
+
+  <div class="deck" id="deck">
+
+    <!-- SLIDE 1: Title -->
+    <section class="slide slide--title active">
+      <div class="client-logo-text">DISHOOM</div>
+      <h1>Brand Strategy Review</h1>
+      <p class="subtitle">Positioning | Digital Experience | Opportunity</p>
+      <div class="prepared-by">
+        Prepared by <strong>Maad House</strong> | February 2026
+      </div>
+    </section>
+
+    <!-- SLIDE 2: Current Brand Identity -->
+    <section class="slide slide--content">
+      <h2>Current Brand Identity</h2>
+      <p class="subtitle">Your visual DNA and market position</p>
+
+      <div class="brand-identity-layout">
+        <!-- Left Column: Visual Elements -->
+        <div class="brand-identity-left">
+          <div class="screenshot-wrapper">
+            <img src="assets/screenshot-current.png" alt="Current Dishoom Website" class="screenshot-small">
+            <div class="screenshot-label">dishoom.com</div>
+          </div>
+
+          <div class="brand-card-compact">
+            <h4>Color Palette</h4>
+            <div class="color-swatches">
+              <div class="color-swatch" style="background: #FEFFED;"><span>#FEFFED</span></div>
+              <div class="color-swatch" style="background: #7C1D1D;"><span>#7C1D1D</span></div>
+              <div class="color-swatch" style="background: #1A1A1A;"><span>#1A1A1A</span></div>
+              <div class="color-swatch" style="background: #B8860B;"><span>Gold</span></div>
+            </div>
+          </div>
+
+          <div class="brand-card-compact">
+            <h4>Typography</h4>
+            <p><strong>Serif (Parsi-inspired)</strong> — timeless, literary elegance. Inspired by 1939-era Indian advertisements.</p>
+          </div>
+        </div>
+
+        <!-- Right Column: Market Context -->
+        <div class="brand-identity-right">
+          <div class="brand-card-compact">
+            <h4>Key Messaging</h4>
+            <p>"From Bombay with Love" — A love letter to the city, its food, culture, and people. Celebrating the democratic spirit of Irani cafes.</p>
+          </div>
+
+          <div class="brand-card-compact">
+            <h4>Design Philosophy</h4>
+            <p><strong>"Deepen, don't dilute"</strong> — Each location has its own founding myth. Design as storytelling, not consistency.</p>
+          </div>
+
+          <div class="market-bullets">
+            <h4>Brand Assets</h4>
+            <ul>
+              <li>11 Dishoom Cafes + 4 Permit Rooms</li>
+              <li>25M+ meals donated (1 per meal served)</li>
+              <li>Sunday Times Best Places to Work 2025</li>
+              <li>Cookbook, album, theatrical productions</li>
+            </ul>
+          </div>
+
+          <div class="market-bullets">
+            <h4>Market Position</h4>
+            <ul>
+              <li>Premium Indian dining with heritage storytelling</li>
+              <li>Between fine dining and casual — unique "Irani cafe" niche</li>
+              <li><strong>Moat:</strong> Unmatched brand narrative depth</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SLIDE 3: Strengths & Opportunities -->
+    <section class="slide slide--content">
+      <h2>Current State Analysis</h2>
+      <p class="subtitle">What's working and where there's room to grow</p>
+      <div class="two-column">
+        <div class="column strengths">
+          <h4>Strengths</h4>
+          <ul>
+            <li>Exceptional physical brand experience — legendary interiors</li>
+            <li>Unique "founding myth" storytelling for each location</li>
+            <li>"Deepen, don't dilute" — rare brand discipline at scale</li>
+            <li>Strong founder heritage (Tilda family, Oxford/Bain backgrounds)</li>
+            <li>Charitable mission woven into operations (25M+ meals)</li>
+            <li>Extended universe: cookbook, album, theatre</li>
+            <li>Long-standing design partnership with & SMITH</li>
+          </ul>
+        </div>
+        <div class="column opportunities">
+          <h4>Opportunities</h4>
+          <ul>
+            <li>Heritage story buried — requires digging to find</li>
+            <li>Digital experience doesn't capture physical magic</li>
+            <li>Booking UX is functional but not brand-building</li>
+            <li>"Founding myths" live on blog, not front and center</li>
+            <li>Menu lacks heritage connection (dish-to-story)</li>
+            <li>Queue experience (brand moment) lost in reservations shift</li>
+            <li>Permit Rooms could have stronger distinct identity</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- SLIDE 4: Competitors -->
+    <section class="slide slide--content">
+      <h2>Competitive Landscape</h2>
+      <p class="subtitle">Premium Indian dining in the UK</p>
+      <div class="competitor-grid">
+        <div class="competitor-card">
+          <h4>Mowgli Street Food</h4>
+          <p class="positioning">"Indian home cooking"</p>
+          <p>25+ locations. Founder Nisha Katona's barrister-to-chef story. Dark palette with gold accents, botanical interiors. £1M+ charity raised. Younger, more playful energy.</p>
+        </div>
+        <div class="competitor-card">
+          <h4>Hoppers</h4>
+          <p class="positioning">Sri Lankan toddy shop</p>
+          <p>3 London locations. JKS Restaurants (Gymkhana, Trishna). Toddy shop inspiration evolving to Tropical Modernism. Michelin Bib Gourmand. Regional specificity as differentiator.</p>
+        </div>
+        <div class="competitor-card">
+          <h4>Tandoor Chop House</h4>
+          <p class="positioning">Indian x British Chop House</p>
+          <p>Ennismore brand. North Indian tandoor meets premium British cuts. Brass ovens, oak panelling, mosaic floors. Fusion positioning — "high-low" elegance.</p>
+        </div>
+      </div>
+      <div class="heritage-quote" style="margin-top: 2rem;">
+        "From 400 Irani cafes in 1960s Bombay to fewer than 30 today — Dishoom's mission to preserve this heritage is unique in the market."
+      </div>
+    </section>
+
+    <!-- SLIDE 5: Direction 1 -->
+    <section class="slide slide--content">
+      <h4 class="alternative-number">Direction 1</h4>
+      <h2>Digital Heritage Translation</h2>
+      <p class="positioning-quote">"Bring the founding myths to the surface"</p>
+      <p>The physical Dishoom experience is legendary. The opportunity: translate that richness into the digital experience. Surface the "founding myths" throughout the website. Make the heritage story the first thing visitors encounter, not something buried in the Journal.</p>
+      <div class="brand-grid">
+        <div class="brand-card">
+          <h4>Palette</h4>
+          <div class="color-swatches">
+            <div class="color-swatch" style="background: #FEFFED;"></div>
+            <div class="color-swatch" style="background: #7C1D1D;"></div>
+            <div class="color-swatch" style="background: #1A1A1A;"></div>
+            <div class="color-swatch" style="background: #B8860B;"></div>
+          </div>
+          <p style="margin-top: 10px; font-size: 0.85rem;">Current palette preserved — evolution, not revolution.</p>
+        </div>
+        <div class="brand-card">
+          <h4>Key Changes</h4>
+          <ul style="margin: 0; padding-left: 1rem; font-size: 0.85rem;">
+            <li>Heritage story on homepage, above the fold</li>
+            <li>Location pages lead with "founding myth"</li>
+            <li>Journal content promoted throughout site</li>
+            <li>Atmospheric imagery at every touchpoint</li>
+          </ul>
+        </div>
+        <div class="brand-card">
+          <h4>Risk Level</h4>
+          <p><strong>Low</strong> — Amplifies existing strengths without changing brand identity. Aligns with "deepen, don't dilute" philosophy.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- SLIDE 6: Direction 2 -->
+    <section class="slide slide--content">
+      <h4 class="alternative-number">Direction 2</h4>
+      <h2>Booking as Brand Moment</h2>
+      <p class="positioning-quote">"The anticipation is part of the experience"</p>
+      <p>Dishoom's original no-reservations queue was legendary — the anticipation became part of the brand. Now that reservations are accepted, the booking experience is purely transactional. What if the reservation flow itself became a storytelling moment?</p>
+      <div class="brand-grid">
+        <div class="brand-card">
+          <h4>The Concept</h4>
+          <p>When you book King's Cross, you learn about the young Irani man who opened his chai stand in 1928. When you book Covent Garden, you discover the original founding story.</p>
+        </div>
+        <div class="brand-card">
+          <h4>Key Changes</h4>
+          <ul style="margin: 0; padding-left: 1rem; font-size: 0.85rem;">
+            <li>Location selection shows "founding myth" preview</li>
+            <li>Confirmation includes heritage story snippet</li>
+            <li>Pre-visit email with location's history</li>
+            <li>Menu preview connected to dish origins</li>
+          </ul>
+        </div>
+        <div class="brand-card">
+          <h4>Risk Level</h4>
+          <p><strong>Low-Medium</strong> — Requires booking system integration. Could increase engagement metrics. Strengthens pre-visit anticipation.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- SLIDE 7: Direction 3 -->
+    <section class="slide slide--content">
+      <h4 class="alternative-number">Direction 3</h4>
+      <h2>Menu as Heritage Guide</h2>
+      <p class="positioning-quote">"Every dish is a doorway to Bombay"</p>
+      <p>Currently, the menu describes dishes but doesn't connect them to the broader Bombay narrative. The cookbook does this beautifully — structured as a gastronomic tour of the city. The online menu could adopt this approach.</p>
+      <div class="brand-grid">
+        <div class="brand-card">
+          <h4>The Concept</h4>
+          <p>Each dish links to its origin story — the street corner, the family recipe, the historical context. The menu becomes a journey through Bombay, not just a list of food.</p>
+        </div>
+        <div class="brand-card">
+          <h4>Key Changes</h4>
+          <ul style="margin: 0; padding-left: 1rem; font-size: 0.85rem;">
+            <li>Dishes grouped by Bombay geography/context</li>
+            <li>"Story" toggle reveals dish origins</li>
+            <li>Photography matches cookbook quality</li>
+            <li>Chef's notes and family recipe attribution</li>
+          </ul>
+        </div>
+        <div class="brand-card">
+          <h4>Risk Level</h4>
+          <p><strong>Medium</strong> — Requires content creation and menu redesign. High potential for differentiation. Connects to existing cookbook narrative.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- SLIDE 8: Recommendation -->
+    <section class="slide slide--client">
+      <h4 class="alternative-number" style="color: var(--client-gold);">Our Recommendation</h4>
+      <h2>Direction 1: Digital Heritage Translation</h2>
+      <p class="subtitle">With elements from Direction 2 (Booking as Brand Moment)</p>
+      <div style="margin-top: 2rem; max-width: 750px;">
+        <p style="font-size: 1.1rem; line-height: 1.8;">
+          Dishoom's brand is exceptional. The physical experience is legendary. The opportunity isn't to change anything — it's to <strong>translate the richness of your physical spaces into your digital presence</strong>.
+        </p>
+        <p style="font-size: 1.1rem; line-height: 1.8; margin-top: 1rem;">
+          Your "founding myths" are a unique asset that no competitor can replicate. Right now, they're hidden in the Journal. We'd bring them to the surface — on the homepage, in location pages, within the booking flow.
+        </p>
+        <p style="font-size: 1.1rem; line-height: 1.8; margin-top: 1rem;">
+          This aligns perfectly with "deepen, don't dilute" — we're not changing Dishoom, we're amplifying what makes it extraordinary.
+        </p>
+      </div>
+    </section>
+
+    <!-- SLIDE 9: Optional Logo Exploration -->
+    <section class="slide slide--content">
+      <h4 class="alternative-number">For Discussion Only</h4>
+      <h2>If You'd Consider Visual Refinements</h2>
+      <p class="subtitle">We recognize the strong & SMITH relationship — these are exploratory only</p>
+      <p style="max-width: 700px; margin-bottom: 1.5rem; color: var(--mh-gray-medium);">
+        Your current identity works beautifully. But if there were ever interest in exploring digital-specific refinements that honor the heritage aesthetic while optimizing for screen — here are directions we might consider:
+      </p>
+      <div class="brand-grid" style="max-width: 800px; gap: 24px;">
+        <div class="brand-card" style="background: var(--client-cream); border: 2px solid rgba(124,29,29,0.2);">
+          <h4 style="color: var(--client-burgundy);">Web Typography Optimization</h4>
+          <p>Maintaining the serif heritage feel while ensuring crisp rendering across devices and screen sizes.</p>
+        </div>
+        <div class="brand-card" style="background: var(--client-cream); border: 2px solid rgba(124,29,29,0.2);">
+          <h4 style="color: var(--client-burgundy);">Responsive Heritage Elements</h4>
+          <p>Adapting the Art Deco details and vintage aesthetic for mobile experiences without losing their charm.</p>
+        </div>
+        <div class="brand-card" style="background: var(--client-cream); border: 2px solid rgba(124,29,29,0.2);">
+          <h4 style="color: var(--client-burgundy);">Animation & Micro-interactions</h4>
+          <p>Subtle movements that evoke the ceiling fans, chai steam, and bustling energy of the physical cafes.</p>
+        </div>
+        <div class="brand-card" style="background: var(--client-cream); border: 2px solid rgba(124,29,29,0.2);">
+          <h4 style="color: var(--client-burgundy);">Location-Specific Digital Identities</h4>
+          <p>Each cafe's digital presence reflecting its unique "founding myth" — like the physical space does.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- SLIDE 10: Quick Wins -->
+    <section class="slide slide--content" style="padding-top: 40px;">
+      <h2>Quick Wins: Homepage Experience</h2>
+      <p class="subtitle">Actionable improvements to surface the heritage story</p>
+
+      <div class="before-after-layout">
+        <!-- Before: Annotated Current State -->
+        <div class="before-section">
+          <div class="section-label before">Current State</div>
+          <div class="annotated-screenshot">
+            <img src="assets/screenshot-current.png" alt="Current Dishoom Homepage">
+            <!-- Annotation 1 -->
+            <div class="annotation" style="top: 8%; left: 65%;">
+              <div class="annotation-number">1</div>
+              <div class="annotation-text">Clean but functional — heritage not immediately visible</div>
+            </div>
+            <!-- Annotation 2 -->
+            <div class="annotation" style="top: 35%; left: -5%;">
+              <div class="annotation-number">2</div>
+              <div class="annotation-text">"Founding myths" require navigation to Journal</div>
+            </div>
+            <!-- Annotation 3 -->
+            <div class="annotation" style="top: 2%; left: 30%;">
+              <div class="annotation-number">3</div>
+              <div class="annotation-text">Booking CTA prominent but transactional</div>
+            </div>
+            <!-- Annotation 4 -->
+            <div class="annotation" style="top: 70%; left: 60%;">
+              <div class="annotation-number">4</div>
+              <div class="annotation-text">400→30 Irani cafe story not visible</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- After: Wireframe Concept -->
+        <div class="after-section">
+          <div class="section-label after">Proposed Structure</div>
+          <div class="wireframe">
+            <!-- Nav -->
+            <div class="wireframe-row nav">
+              <div class="wireframe-logo">DISHOOM</div>
+              <div class="wireframe-nav-items">
+                <div class="wireframe-nav-item"></div>
+                <div class="wireframe-nav-item"></div>
+                <div class="wireframe-nav-item"></div>
+                <div class="wireframe-nav-item"></div>
+              </div>
+            </div>
+            <!-- Hero -->
+            <div class="wireframe-hero">
+              <div class="wireframe-hero-left">
+                <div class="wireframe-headline"></div>
+                <div class="wireframe-subhead"></div>
+                <div class="wireframe-subhead" style="width: 50%;"></div>
+                <!-- Heritage Story Entry -->
+                <div class="wireframe-heritage">
+                  <div class="wireframe-heritage-label">The Irani Cafe Heritage</div>
+                  <div class="wireframe-heritage-text">
+                    <div style="width: 95%;"></div>
+                    <div style="width: 80%;"></div>
+                    <div style="width: 60%;"></div>
+                  </div>
+                </div>
+                <div class="wireframe-cta"></div>
+              </div>
+              <div class="wireframe-hero-right">
+                <span class="wireframe-food-label">Atmospheric Imagery</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="improvement-list">
+            <div class="improvement-item">
+              <div class="improvement-check">✓</div>
+              <span>Heritage story prominently above the fold</span>
+            </div>
+            <div class="improvement-item">
+              <div class="improvement-check">✓</div>
+              <span>"400 → 30 Irani cafes" narrative visible immediately</span>
+            </div>
+            <div class="improvement-item">
+              <div class="improvement-check">✓</div>
+              <span>Atmosphere-forward imagery (not just food)</span>
+            </div>
+            <div class="improvement-item">
+              <div class="improvement-check">✓</div>
+              <span>Journey to "founding myths" reduced from 3 clicks to 1</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SLIDE 11: CTA -->
+    <section class="slide slide--accent">
+      <div class="cta-content">
+        <h2>Interested in exploring further?</h2>
+        <p style="margin-bottom: 1rem; color: rgba(254,255,237,0.9); font-size: 1.1rem;">
+          We'd love to understand your digital priorities and see how we might help translate the Dishoom magic to screen.
+        </p>
+        <div class="cta-buttons">
+          <a href="https://calendly.com/maadhouse/consultation" target="_blank" class="cta-button-primary">
+            Schedule a 30-min Call with Reece
+          </a>
+          <span class="cta-or">or</span>
+          <a href="mailto:alice.w@dishoom.com?subject=Re:%20Dishoom%20Brand%20Discussion&cc=hello@maad.house" class="cta-button-secondary">
+            Reply to This Email
+          </a>
+        </div>
+        <p style="margin-top: 2.5rem; font-size: 0.9rem; color: rgba(254,255,237,0.6);">
+          <a href="https://maad.house" target="_blank" style="color: rgba(254,255,237,0.8); text-decoration: none;">maad.house</a>
+        </p>
+      </div>
+    </section>
+
+  </div>
+
+  <!-- Navigation -->
+  <nav class="nav">
+    <button class="nav-btn" id="prev" aria-label="Previous slide">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <polyline points="15 18 9 12 15 6"></polyline>
+      </svg>
+    </button>
+    <span class="slide-counter"><span id="current">1</span> / <span id="total">11</span></span>
+    <button class="nav-btn" id="next" aria-label="Next slide">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <polyline points="9 18 15 12 9 6"></polyline>
+      </svg>
+    </button>
+  </nav>
+
+  <script>
+    const deck = document.getElementById('deck');
+    const slides = deck.querySelectorAll('.slide');
+    const progress = document.getElementById('progress');
+    const prevBtn = document.getElementById('prev');
+    const nextBtn = document.getElementById('next');
+    const currentEl = document.getElementById('current');
+    const totalEl = document.getElementById('total');
+
+    let currentSlide = 0;
+    const totalSlides = slides.length;
+    totalEl.textContent = totalSlides;
+
+    function updateSlide() {
+      slides.forEach((slide, i) => slide.classList.toggle('active', i === currentSlide));
+      currentEl.textContent = currentSlide + 1;
+      progress.style.width = ((currentSlide + 1) / totalSlides * 100) + '%';
+      prevBtn.disabled = currentSlide === 0;
+      nextBtn.disabled = currentSlide === totalSlides - 1;
+    }
+
+    function goToSlide(n) {
+      currentSlide = Math.max(0, Math.min(n, totalSlides - 1));
+      updateSlide();
+    }
+
+    prevBtn.addEventListener('click', () => goToSlide(currentSlide - 1));
+    nextBtn.addEventListener('click', () => goToSlide(currentSlide + 1));
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight' || e.key === ' ') { e.preventDefault(); goToSlide(currentSlide + 1); }
+      else if (e.key === 'ArrowLeft') { e.preventDefault(); goToSlide(currentSlide - 1); }
+      else if (e.key === 'Home') { e.preventDefault(); goToSlide(0); }
+      else if (e.key === 'End') { e.preventDefault(); goToSlide(totalSlides - 1); }
+    });
+
+    let touchStartX = 0;
+    deck.addEventListener('touchstart', (e) => { touchStartX = e.changedTouches[0].screenX; }, { passive: true });
+    deck.addEventListener('touchend', (e) => {
+      const diff = touchStartX - e.changedTouches[0].screenX;
+      if (Math.abs(diff) > 50) { diff > 0 ? goToSlide(currentSlide + 1) : goToSlide(currentSlide - 1); }
+    }, { passive: true });
+
+    updateSlide();
+  </script>
+</body>
+</html>

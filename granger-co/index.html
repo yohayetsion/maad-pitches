@@ -1,0 +1,1222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Granger & Co Brand Partnership | Maad House</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* Granger & Co Brand Colors - Light, Airy Australian Palette */
+            --cream: #F5F3EF;
+            --warm-white: #FDFCFA;
+            --pale-yellow: #FFF8E1;
+            --golden: #C9A962;
+            --golden-light: #E5D4A1;
+            --charcoal: #2D2D2D;
+            --warm-grey: #666666;
+            --light-grey: #9A9A9A;
+
+            /* Maad House Accent */
+            --maad-coral: #E85A4F;
+            --maad-dark: #1a1a1a;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--cream);
+            color: var(--charcoal);
+            line-height: 1.6;
+            overflow: hidden;
+        }
+
+        /* Slide Container */
+        .slides-container {
+            width: 100vw;
+            height: 100vh;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .slide {
+            width: 100vw;
+            height: 100vh;
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 60px 80px;
+            position: relative;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+
+        .slide.active {
+            display: flex;
+            opacity: 1;
+        }
+
+        /* Typography */
+        h1 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 4.5rem;
+            font-weight: 400;
+            letter-spacing: -0.02em;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            color: var(--charcoal);
+        }
+
+        h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 3rem;
+            font-weight: 400;
+            letter-spacing: -0.01em;
+            margin-bottom: 1rem;
+            color: var(--charcoal);
+        }
+
+        h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.8rem;
+            font-weight: 500;
+            margin-bottom: 0.75rem;
+            color: var(--charcoal);
+        }
+
+        p {
+            font-size: 1.1rem;
+            font-weight: 300;
+            color: var(--warm-grey);
+            max-width: 700px;
+        }
+
+        .subtitle {
+            font-size: 1.3rem;
+            color: var(--golden);
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            font-weight: 500;
+            margin-bottom: 1rem;
+        }
+
+        /* Navigation */
+        .nav {
+            position: fixed;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 16px;
+            z-index: 100;
+            background: var(--warm-white);
+            padding: 12px 24px;
+            border-radius: 50px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+
+        .nav button {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            border: 1px solid var(--golden-light);
+            background: var(--warm-white);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            color: var(--charcoal);
+        }
+
+        .nav button:hover {
+            background: var(--golden);
+            border-color: var(--golden);
+            color: white;
+        }
+
+        .slide-counter {
+            display: flex;
+            align-items: center;
+            font-size: 0.9rem;
+            color: var(--light-grey);
+            padding: 0 16px;
+            font-weight: 400;
+        }
+
+        /* Progress Bar */
+        .progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--golden), var(--golden-light));
+            transition: width 0.3s ease;
+            z-index: 100;
+        }
+
+        /* Slide 1 - Title */
+        .slide-title {
+            background: linear-gradient(135deg, var(--cream) 0%, var(--pale-yellow) 50%, var(--warm-white) 100%);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .slide-title::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 80%;
+            height: 200%;
+            background: radial-gradient(ellipse at center, rgba(201, 169, 98, 0.1) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .brand-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            background: var(--warm-white);
+            padding: 16px 32px;
+            border-radius: 50px;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+        }
+
+        .brand-badge img {
+            height: 40px;
+        }
+
+        .brand-badge span {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--light-grey);
+        }
+
+        .title-main {
+            font-size: 5rem;
+            margin-bottom: 1rem;
+        }
+
+        .title-tagline {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.8rem;
+            font-style: italic;
+            color: var(--golden);
+            margin-bottom: 2rem;
+        }
+
+        .prepared-for {
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--golden-light);
+        }
+
+        .prepared-for p {
+            font-size: 0.95rem;
+            color: var(--light-grey);
+        }
+
+        /* Quote Block */
+        .quote-block {
+            background: var(--warm-white);
+            padding: 40px 50px;
+            border-left: 4px solid var(--golden);
+            margin: 2rem 0;
+            max-width: 800px;
+            box-shadow: 0 4px 30px rgba(0,0,0,0.04);
+        }
+
+        .quote-block blockquote {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.6rem;
+            font-style: italic;
+            color: var(--charcoal);
+            line-height: 1.5;
+        }
+
+        .quote-block cite {
+            display: block;
+            margin-top: 1rem;
+            font-size: 0.95rem;
+            color: var(--golden);
+            font-style: normal;
+        }
+
+        /* Content Grid */
+        .content-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            max-width: 1200px;
+            width: 100%;
+            align-items: center;
+        }
+
+        .content-left h2 {
+            margin-bottom: 1.5rem;
+        }
+
+        .content-right {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        /* Cards */
+        .card {
+            background: var(--warm-white);
+            padding: 28px 32px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.04);
+            border: 1px solid rgba(201, 169, 98, 0.15);
+        }
+
+        .card h4 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            color: var(--charcoal);
+        }
+
+        .card p {
+            font-size: 0.95rem;
+            color: var(--warm-grey);
+        }
+
+        .card-highlight {
+            background: linear-gradient(135deg, var(--golden) 0%, #D4B46A 100%);
+            color: white;
+        }
+
+        .card-highlight h4,
+        .card-highlight p {
+            color: white;
+        }
+
+        /* Competitor Grid */
+        .competitor-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 24px;
+            max-width: 1200px;
+            width: 100%;
+        }
+
+        .competitor-card {
+            background: var(--warm-white);
+            padding: 28px;
+            border-radius: 12px;
+            text-align: center;
+            border: 1px solid rgba(0,0,0,0.06);
+            transition: all 0.3s ease;
+        }
+
+        .competitor-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 40px rgba(0,0,0,0.08);
+        }
+
+        .competitor-logo {
+            width: 60px;
+            height: 60px;
+            background: var(--cream);
+            border-radius: 50%;
+            margin: 0 auto 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: var(--charcoal);
+        }
+
+        .competitor-card h4 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.2rem;
+            margin-bottom: 8px;
+            color: var(--charcoal);
+        }
+
+        .competitor-card .position {
+            font-size: 0.8rem;
+            color: var(--golden);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 12px;
+        }
+
+        .competitor-card p {
+            font-size: 0.85rem;
+            color: var(--warm-grey);
+        }
+
+        /* Strengths/Opportunities */
+        .two-col {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            max-width: 1100px;
+            width: 100%;
+        }
+
+        .col-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 24px;
+        }
+
+        .col-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.4rem;
+        }
+
+        .icon-strength {
+            background: linear-gradient(135deg, var(--golden) 0%, var(--golden-light) 100%);
+        }
+
+        .icon-opportunity {
+            background: linear-gradient(135deg, var(--maad-coral) 0%, #F2756D 100%);
+        }
+
+        .list-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 14px;
+            margin-bottom: 18px;
+            padding: 16px 20px;
+            background: var(--warm-white);
+            border-radius: 10px;
+            border: 1px solid rgba(0,0,0,0.04);
+        }
+
+        .list-bullet {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--golden);
+            flex-shrink: 0;
+            margin-top: 6px;
+        }
+
+        .list-item p {
+            font-size: 0.95rem;
+            color: var(--charcoal);
+            max-width: none;
+        }
+
+        /* Direction Slides */
+        .direction-slide {
+            position: relative;
+        }
+
+        .direction-number {
+            position: absolute;
+            top: 60px;
+            left: 80px;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 8rem;
+            color: var(--golden-light);
+            opacity: 0.3;
+            line-height: 1;
+        }
+
+        .direction-content {
+            max-width: 1100px;
+            width: 100%;
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .direction-text .subtitle {
+            font-size: 1rem;
+        }
+
+        .direction-text h2 {
+            font-size: 2.8rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .direction-features {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            margin-top: 2rem;
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 14px 20px;
+            background: var(--warm-white);
+            border-radius: 8px;
+            font-size: 0.95rem;
+            color: var(--charcoal);
+        }
+
+        .feature-item span {
+            color: var(--golden);
+        }
+
+        .direction-visual {
+            background: linear-gradient(135deg, var(--cream) 0%, var(--pale-yellow) 100%);
+            height: 400px;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(201, 169, 98, 0.2);
+        }
+
+        .direction-visual::after {
+            content: 'Visual Concept';
+            font-size: 0.9rem;
+            color: var(--light-grey);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        /* Recommendation Slide */
+        .recommendation-slide {
+            background: linear-gradient(135deg, var(--charcoal) 0%, #3D3D3D 100%);
+        }
+
+        .recommendation-slide h2,
+        .recommendation-slide h3,
+        .recommendation-slide p {
+            color: white;
+        }
+
+        .recommendation-slide .subtitle {
+            color: var(--golden);
+        }
+
+        .recommendation-content {
+            max-width: 900px;
+            text-align: center;
+        }
+
+        .recommendation-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            background: rgba(201, 169, 98, 0.15);
+            padding: 16px 28px;
+            border-radius: 50px;
+            margin-bottom: 2rem;
+            border: 1px solid rgba(201, 169, 98, 0.3);
+        }
+
+        .recommendation-badge span {
+            color: var(--golden);
+            font-weight: 500;
+        }
+
+        .recommendation-reasons {
+            display: flex;
+            gap: 30px;
+            margin-top: 3rem;
+            justify-content: center;
+        }
+
+        .reason-card {
+            background: rgba(255,255,255,0.05);
+            padding: 28px 32px;
+            border-radius: 12px;
+            flex: 1;
+            max-width: 280px;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .reason-card h4 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.2rem;
+            color: var(--golden);
+            margin-bottom: 10px;
+        }
+
+        .reason-card p {
+            font-size: 0.9rem;
+            color: rgba(255,255,255,0.7);
+        }
+
+        /* Quick Wins */
+        .wins-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 28px;
+            max-width: 1100px;
+            width: 100%;
+        }
+
+        .win-card {
+            background: var(--warm-white);
+            padding: 32px;
+            border-radius: 12px;
+            text-align: center;
+            border: 1px solid rgba(0,0,0,0.04);
+            transition: all 0.3s ease;
+        }
+
+        .win-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 40px rgba(0,0,0,0.06);
+        }
+
+        .win-icon {
+            width: 56px;
+            height: 56px;
+            background: var(--pale-yellow);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 18px;
+            font-size: 1.5rem;
+        }
+
+        .win-card h4 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            color: var(--charcoal);
+        }
+
+        .win-card p {
+            font-size: 0.9rem;
+            color: var(--warm-grey);
+        }
+
+        .win-card .timeline {
+            display: inline-block;
+            margin-top: 14px;
+            padding: 6px 14px;
+            background: var(--cream);
+            border-radius: 20px;
+            font-size: 0.75rem;
+            color: var(--golden);
+            font-weight: 500;
+        }
+
+        /* CTA Slide */
+        .cta-slide {
+            background: linear-gradient(135deg, var(--pale-yellow) 0%, var(--cream) 50%, var(--warm-white) 100%);
+            text-align: center;
+        }
+
+        .cta-content {
+            max-width: 700px;
+        }
+
+        .cta-slide h2 {
+            font-size: 3.2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            margin-top: 2.5rem;
+        }
+
+        .btn {
+            padding: 16px 36px;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 500;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .btn-primary {
+            background: var(--golden);
+            color: white;
+            border: none;
+        }
+
+        .btn-primary:hover {
+            background: #B89952;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(201, 169, 98, 0.3);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--charcoal);
+            border: 2px solid var(--charcoal);
+        }
+
+        .btn-secondary:hover {
+            background: var(--charcoal);
+            color: white;
+        }
+
+        .contact-info {
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--golden-light);
+        }
+
+        .contact-info p {
+            font-size: 0.95rem;
+            color: var(--light-grey);
+            margin: 0 auto;
+        }
+
+        .contact-info a {
+            color: var(--golden);
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        /* Logo Exploration Slide */
+        .logo-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            max-width: 1000px;
+            width: 100%;
+        }
+
+        .logo-option {
+            background: var(--warm-white);
+            height: 200px;
+            border-radius: 12px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .logo-option:hover {
+            border-color: var(--golden);
+            transform: translateY(-4px);
+        }
+
+        .logo-placeholder {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.8rem;
+            color: var(--charcoal);
+            margin-bottom: 12px;
+        }
+
+        .logo-label {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--light-grey);
+        }
+
+        /* Screenshot placeholder */
+        .screenshot-container {
+            background: var(--warm-white);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 8px 40px rgba(0,0,0,0.08);
+            border: 1px solid rgba(0,0,0,0.04);
+        }
+
+        .screenshot-placeholder {
+            width: 100%;
+            height: 320px;
+            background: linear-gradient(135deg, var(--cream) 0%, var(--pale-yellow) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--light-grey);
+            font-size: 0.9rem;
+        }
+
+        /* Keyboard hint */
+        .keyboard-hint {
+            position: fixed;
+            bottom: 100px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 0.75rem;
+            color: var(--light-grey);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .slide.active .animate-in {
+            animation: fadeInUp 0.6s ease forwards;
+        }
+
+        .slide.active .delay-1 { animation-delay: 0.1s; }
+        .slide.active .delay-2 { animation-delay: 0.2s; }
+        .slide.active .delay-3 { animation-delay: 0.3s; }
+        .slide.active .delay-4 { animation-delay: 0.4s; }
+    </style>
+</head>
+<body>
+    <div class="progress-bar" id="progressBar"></div>
+
+    <div class="slides-container">
+        <!-- Slide 1: Title -->
+        <div class="slide slide-title active">
+            <div class="brand-badge animate-in">
+                <span>Brand Partnership Proposal</span>
+            </div>
+            <h1 class="title-main animate-in delay-1">Granger & Co</h1>
+            <p class="title-tagline animate-in delay-2">"Sunny, light, vibrant, and always generous"</p>
+            <p class="animate-in delay-3" style="max-width: 600px; text-align: center;">
+                Evolving a beloved Australian dining institution for its next chapter,
+                while honoring Bill Granger's extraordinary legacy.
+            </p>
+            <div class="prepared-for animate-in delay-4">
+                <p>Prepared for Avron Alhadeff, Managing Director</p>
+                <p style="margin-top: 8px;">February 2026 | Maad House</p>
+            </div>
+        </div>
+
+        <!-- Slide 2: Current Brand Identity -->
+        <div class="slide">
+            <div class="content-grid">
+                <div class="content-left">
+                    <p class="subtitle animate-in">Current Brand Identity</p>
+                    <h2 class="animate-in delay-1">A Light-Filled Legacy</h2>
+                    <p class="animate-in delay-2">
+                        Bill Granger created something rare: a dining experience that captures
+                        Australia's essence - the light, the generosity, the relaxed joy.
+                    </p>
+                    <div class="quote-block animate-in delay-3">
+                        <blockquote>
+                            "The restaurateur most responsible for the Australian cafe's global reach"
+                        </blockquote>
+                        <cite>- The New Yorker</cite>
+                    </div>
+                </div>
+                <div class="content-right">
+                    <div class="screenshot-container animate-in delay-2">
+                        <div class="screenshot-placeholder">
+                            <span>assets/screenshot-current.png</span>
+                        </div>
+                    </div>
+                    <div class="card animate-in delay-3">
+                        <h4>Current Visual System</h4>
+                        <p>Cream backgrounds, warm gold accents, natural photography,
+                        clean typography - pleasant but potential to be more distinctive.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 3: Strengths & Opportunities -->
+        <div class="slide">
+            <p class="subtitle animate-in">Brand Analysis</p>
+            <h2 class="animate-in delay-1" style="margin-bottom: 2rem;">Strengths & Opportunities</h2>
+            <div class="two-col">
+                <div>
+                    <div class="col-header animate-in delay-2">
+                        <div class="col-icon icon-strength">+</div>
+                        <h3>Strengths</h3>
+                    </div>
+                    <div class="list-item animate-in delay-2">
+                        <div class="list-bullet"></div>
+                        <p><strong>Legendary founder legacy</strong> - Bill Granger's global reputation and influence</p>
+                    </div>
+                    <div class="list-item animate-in delay-2">
+                        <div class="list-bullet"></div>
+                        <p><strong>Distinctive positioning</strong> - Only authentic Australian cafe culture in London</p>
+                    </div>
+                    <div class="list-item animate-in delay-2">
+                        <div class="list-bullet"></div>
+                        <p><strong>Cult signature dishes</strong> - "Best scrambled eggs in the world" (NYT)</p>
+                    </div>
+                    <div class="list-item animate-in delay-2">
+                        <div class="list-bullet"></div>
+                        <p><strong>Prime locations</strong> - Four strong London neighborhoods</p>
+                    </div>
+                </div>
+                <div>
+                    <div class="col-header animate-in delay-3">
+                        <div class="col-icon icon-opportunity">!</div>
+                        <h3>Opportunities</h3>
+                    </div>
+                    <div class="list-item animate-in delay-3">
+                        <div class="list-bullet" style="background: var(--maad-coral);"></div>
+                        <p><strong>Heritage celebration</strong> - Bill's story deserves to be more prominent</p>
+                    </div>
+                    <div class="list-item animate-in delay-3">
+                        <div class="list-bullet" style="background: var(--maad-coral);"></div>
+                        <p><strong>Digital presence</strong> - Website doesn't capture the brand magic</p>
+                    </div>
+                    <div class="list-item animate-in delay-3">
+                        <div class="list-bullet" style="background: var(--maad-coral);"></div>
+                        <p><strong>Australian identity</strong> - Opportunity to own "Australian" more boldly</p>
+                    </div>
+                    <div class="list-item animate-in delay-3">
+                        <div class="list-bullet" style="background: var(--maad-coral);"></div>
+                        <p><strong>"At Home" expansion</strong> - Retail products could grow significantly</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 4: Competitive Landscape -->
+        <div class="slide">
+            <p class="subtitle animate-in">Competitive Landscape</p>
+            <h2 class="animate-in delay-1" style="margin-bottom: 2.5rem;">Standing Out in London's All-Day Dining Scene</h2>
+            <div class="competitor-grid">
+                <div class="competitor-card animate-in delay-2">
+                    <div class="competitor-logo">W</div>
+                    <h4>The Wolseley</h4>
+                    <p class="position">Grand European</p>
+                    <p>Opulent, formal, continental traditions. Old World elegance vs Australian sunshine.</p>
+                </div>
+                <div class="competitor-card animate-in delay-2">
+                    <div class="competitor-logo">D</div>
+                    <h4>Dishoom</h4>
+                    <p class="position">Bombay Nostalgia</p>
+                    <p>Theatrical storytelling, strong cultural identity. Maximalist vs Granger's minimalism.</p>
+                </div>
+                <div class="competitor-card animate-in delay-3">
+                    <div class="competitor-logo">C</div>
+                    <h4>Caravan</h4>
+                    <p class="position">Ethical Modern</p>
+                    <p>Coffee-led, B Corp certified, utilitarian. Leads with values vs atmosphere.</p>
+                </div>
+                <div class="competitor-card animate-in delay-3">
+                    <div class="competitor-logo" style="background: var(--golden-light); color: white;">G</div>
+                    <h4>Granger & Co</h4>
+                    <p class="position">Australian Light</p>
+                    <p><strong>Unique position:</strong> Only true Australian cafe culture. Light, generous, joyful.</p>
+                </div>
+            </div>
+            <p class="animate-in delay-4" style="margin-top: 2rem; text-align: center;">
+                Your distinctiveness isn't about competing - it's about owning what only you can be.
+            </p>
+        </div>
+
+        <!-- Slide 5: Direction 1 -->
+        <div class="slide direction-slide">
+            <div class="direction-number">01</div>
+            <div class="direction-content">
+                <div class="direction-text">
+                    <p class="subtitle animate-in">Direction One</p>
+                    <h2 class="animate-in delay-1">Refined Evolution</h2>
+                    <p class="animate-in delay-2">
+                        Elevate the existing brand with a more premium, sophisticated expression
+                        while maintaining the light, welcoming spirit that defines Granger & Co.
+                    </p>
+                    <div class="direction-features">
+                        <div class="feature-item animate-in delay-3">
+                            <span>+</span> Enhanced typography with elegant serif/sans pairing
+                        </div>
+                        <div class="feature-item animate-in delay-3">
+                            <span>+</span> Richer golden accents for premium positioning
+                        </div>
+                        <div class="feature-item animate-in delay-3">
+                            <span>+</span> Photography guidelines emphasizing natural Australian light
+                        </div>
+                        <div class="feature-item animate-in delay-4">
+                            <span>+</span> Subtle brand refresh that honors existing equity
+                        </div>
+                    </div>
+                </div>
+                <div class="direction-visual animate-in delay-2">
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 6: Direction 2 -->
+        <div class="slide direction-slide">
+            <div class="direction-number">02</div>
+            <div class="direction-content">
+                <div class="direction-text">
+                    <p class="subtitle animate-in">Direction Two</p>
+                    <h2 class="animate-in delay-1">Heritage Reinvented</h2>
+                    <p class="animate-in delay-2">
+                        Place Bill Granger's extraordinary story at the heart of the brand.
+                        A celebration of the man who invented breakfast as we know it.
+                    </p>
+                    <div class="direction-features">
+                        <div class="feature-item animate-in delay-3">
+                            <span>+</span> "Bill's Philosophy" integrated throughout experience
+                        </div>
+                        <div class="feature-item animate-in delay-3">
+                            <span>+</span> Archive photography and founder storytelling
+                        </div>
+                        <div class="feature-item animate-in delay-3">
+                            <span>+</span> Signature dishes with heritage narratives
+                        </div>
+                        <div class="feature-item animate-in delay-4">
+                            <span>+</span> Cookbook and content platform potential
+                        </div>
+                    </div>
+                </div>
+                <div class="direction-visual animate-in delay-2">
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 7: Direction 3 -->
+        <div class="slide direction-slide">
+            <div class="direction-number">03</div>
+            <div class="direction-content">
+                <div class="direction-text">
+                    <p class="subtitle animate-in">Direction Three</p>
+                    <h2 class="animate-in delay-1">Australian Bold</h2>
+                    <p class="animate-in delay-2">
+                        Lean fully into Australian identity with a bolder, more confident expression.
+                        Own "Australian" as a distinctive, desirable lifestyle brand.
+                    </p>
+                    <div class="direction-features">
+                        <div class="feature-item animate-in delay-3">
+                            <span>+</span> Warmer, sunnier color palette with unexpected accents
+                        </div>
+                        <div class="feature-item animate-in delay-3">
+                            <span>+</span> Contemporary Australian design references
+                        </div>
+                        <div class="feature-item animate-in delay-3">
+                            <span>+</span> Stronger "At Home" retail brand extension
+                        </div>
+                        <div class="feature-item animate-in delay-4">
+                            <span>+</span> Lifestyle positioning beyond just dining
+                        </div>
+                    </div>
+                </div>
+                <div class="direction-visual animate-in delay-2">
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 8: Recommendation -->
+        <div class="slide recommendation-slide">
+            <div class="recommendation-content">
+                <div class="recommendation-badge animate-in">
+                    <span>Our Recommendation</span>
+                </div>
+                <h2 class="animate-in delay-1">Direction 2: Heritage Reinvented</h2>
+                <p class="animate-in delay-2" style="color: rgba(255,255,255,0.8); margin: 0 auto;">
+                    This is a pivotal moment. With Bill's passing, there's both a responsibility
+                    and an opportunity to celebrate his legacy while showing the vision continues.
+                </p>
+                <div class="recommendation-reasons">
+                    <div class="reason-card animate-in delay-3">
+                        <h4>Emotional Connection</h4>
+                        <p>Customers love Bill's story. Making it central creates deeper brand loyalty.</p>
+                    </div>
+                    <div class="reason-card animate-in delay-3">
+                        <h4>Unique Asset</h4>
+                        <p>No competitor has a founder story this compelling. Own it.</p>
+                    </div>
+                    <div class="reason-card animate-in delay-4">
+                        <h4>Content Platform</h4>
+                        <p>Unlocks cookbook tie-ins, recipe content, and community building.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 9: Logo Exploration -->
+        <div class="slide">
+            <p class="subtitle animate-in">Optional Enhancement</p>
+            <h2 class="animate-in delay-1" style="margin-bottom: 2.5rem;">Logo Exploration</h2>
+            <div class="logo-grid">
+                <div class="logo-option animate-in delay-2">
+                    <div class="logo-placeholder">Granger & Co.</div>
+                    <span class="logo-label">Current</span>
+                </div>
+                <div class="logo-option animate-in delay-2">
+                    <div class="logo-placeholder" style="font-weight: 600;">Granger & Co</div>
+                    <span class="logo-label">Refined Serif</span>
+                </div>
+                <div class="logo-option animate-in delay-3">
+                    <div class="logo-placeholder" style="font-family: 'Inter', sans-serif; font-size: 1.4rem; letter-spacing: 0.15em;">GRANGER & CO</div>
+                    <span class="logo-label">Modern Sans</span>
+                </div>
+            </div>
+            <p class="animate-in delay-4" style="text-align: center; margin-top: 2rem;">
+                Logo refinement is optional - the current mark has strong equity.
+                Focus should be on the broader visual system and storytelling.
+            </p>
+        </div>
+
+        <!-- Slide 10: Quick Wins -->
+        <div class="slide">
+            <p class="subtitle animate-in">Immediate Impact</p>
+            <h2 class="animate-in delay-1" style="margin-bottom: 2.5rem;">Quick Wins</h2>
+            <div class="wins-grid">
+                <div class="win-card animate-in delay-2">
+                    <div class="win-icon">1</div>
+                    <h4>Bill's Story Page</h4>
+                    <p>Dedicated "Our Story" page with Bill's philosophy, archive photos, and quotes from press.</p>
+                    <span class="timeline">2-3 weeks</span>
+                </div>
+                <div class="win-card animate-in delay-2">
+                    <div class="win-icon">2</div>
+                    <h4>Photography Guidelines</h4>
+                    <p>Define the "Granger light" - bright, natural, warm. Train all content creators.</p>
+                    <span class="timeline">1-2 weeks</span>
+                </div>
+                <div class="win-card animate-in delay-3">
+                    <div class="win-icon">3</div>
+                    <h4>Menu Heritage Stories</h4>
+                    <p>Add Bill's stories behind signature dishes - scrambled eggs, ricotta hotcakes.</p>
+                    <span class="timeline">2-4 weeks</span>
+                </div>
+                <div class="win-card animate-in delay-3">
+                    <div class="win-icon">4</div>
+                    <h4>"At Home" Brand Refresh</h4>
+                    <p>Elevate retail packaging to premium, gift-worthy positioning.</p>
+                    <span class="timeline">4-6 weeks</span>
+                </div>
+                <div class="win-card animate-in delay-4">
+                    <div class="win-icon">5</div>
+                    <h4>Social Templates</h4>
+                    <p>Consistent visual system for Instagram and digital channels.</p>
+                    <span class="timeline">1-2 weeks</span>
+                </div>
+                <div class="win-card animate-in delay-4">
+                    <div class="win-icon">6</div>
+                    <h4>Email Redesign</h4>
+                    <p>Beautiful, on-brand email templates for reservations and marketing.</p>
+                    <span class="timeline">2-3 weeks</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 11: CTA -->
+        <div class="slide cta-slide">
+            <div class="cta-content">
+                <p class="subtitle animate-in">Let's Talk</p>
+                <h2 class="animate-in delay-1">Ready to Honour Bill's Legacy?</h2>
+                <p class="animate-in delay-2">
+                    We'd love to explore how Maad House can help Granger & Co
+                    evolve while staying true to the sunny, generous spirit
+                    Bill Granger created.
+                </p>
+                <div class="cta-buttons animate-in delay-3">
+                    <a href="mailto:hello@maad.house" class="btn btn-primary">Schedule a Call</a>
+                    <a href="https://maad.house" class="btn btn-secondary">View Our Work</a>
+                </div>
+                <div class="contact-info animate-in delay-4">
+                    <p>
+                        <a href="mailto:hello@maad.house">hello@maad.house</a> |
+                        <a href="https://maad.house">maad.house</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <div class="nav">
+        <button onclick="prevSlide()" aria-label="Previous slide">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M15 18l-6-6 6-6"/>
+            </svg>
+        </button>
+        <div class="slide-counter">
+            <span id="currentSlide">1</span> / <span id="totalSlides">11</span>
+        </div>
+        <button onclick="nextSlide()" aria-label="Next slide">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M9 18l6-6-6-6"/>
+            </svg>
+        </button>
+    </div>
+
+    <div class="keyboard-hint">Use arrow keys to navigate</div>
+
+    <script>
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        const totalSlides = slides.length;
+
+        document.getElementById('totalSlides').textContent = totalSlides;
+
+        function showSlide(index) {
+            slides.forEach((slide, i) => {
+                slide.classList.remove('active');
+                if (i === index) {
+                    slide.classList.add('active');
+                }
+            });
+            document.getElementById('currentSlide').textContent = index + 1;
+            document.getElementById('progressBar').style.width = ((index + 1) / totalSlides * 100) + '%';
+        }
+
+        function nextSlide() {
+            currentSlide = (currentSlide + 1) % totalSlides;
+            showSlide(currentSlide);
+        }
+
+        function prevSlide() {
+            currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+            showSlide(currentSlide);
+        }
+
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight' || e.key === ' ') {
+                e.preventDefault();
+                nextSlide();
+            } else if (e.key === 'ArrowLeft') {
+                e.preventDefault();
+                prevSlide();
+            }
+        });
+
+        // Touch/swipe support
+        let touchStartX = 0;
+        let touchEndX = 0;
+
+        document.addEventListener('touchstart', (e) => {
+            touchStartX = e.changedTouches[0].screenX;
+        });
+
+        document.addEventListener('touchend', (e) => {
+            touchEndX = e.changedTouches[0].screenX;
+            if (touchStartX - touchEndX > 50) {
+                nextSlide();
+            } else if (touchEndX - touchStartX > 50) {
+                prevSlide();
+            }
+        });
+
+        // Initialize
+        showSlide(0);
+    </script>
+</body>
+</html>

@@ -1,0 +1,1125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blacklock x Maad House - Brand Partnership</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* Blacklock Brand Colors */
+            --blacklock-charcoal: #1a1a1a;
+            --blacklock-slate: #2d2d2d;
+            --blacklock-purple: #7f54b3;
+            --blacklock-purple-light: #9b6dc6;
+            --blacklock-cream: #f5f2ed;
+            --blacklock-warm-white: #faf9f7;
+            --blacklock-gold: #c9a96e;
+
+            /* Maad House Accent */
+            --maad-coral: #ff6b5b;
+
+            /* Typography */
+            --font-display: 'Playfair Display', Georgia, serif;
+            --font-body: 'Inter', -apple-system, sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            height: 100%;
+            overflow: hidden;
+            font-family: var(--font-body);
+            background: var(--blacklock-charcoal);
+            color: var(--blacklock-cream);
+        }
+
+        /* Slide Container */
+        .slides-container {
+            height: 100vh;
+            width: 100vw;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 60px 80px;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.6s ease, visibility 0.6s ease;
+        }
+
+        .slide.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* Typography */
+        h1 {
+            font-family: var(--font-display);
+            font-size: 4.5rem;
+            font-weight: 600;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            letter-spacing: -0.02em;
+        }
+
+        h2 {
+            font-family: var(--font-display);
+            font-size: 3rem;
+            font-weight: 500;
+            margin-bottom: 2rem;
+            letter-spacing: -0.01em;
+        }
+
+        h3 {
+            font-family: var(--font-display);
+            font-size: 1.8rem;
+            font-weight: 500;
+            margin-bottom: 1rem;
+            color: var(--blacklock-purple-light);
+        }
+
+        p {
+            font-size: 1.25rem;
+            line-height: 1.7;
+            max-width: 800px;
+            font-weight: 300;
+        }
+
+        .subtitle {
+            font-size: 1.5rem;
+            opacity: 0.8;
+            font-weight: 300;
+            margin-bottom: 2rem;
+        }
+
+        /* Accent Colors */
+        .accent-purple {
+            color: var(--blacklock-purple-light);
+        }
+
+        .accent-gold {
+            color: var(--blacklock-gold);
+        }
+
+        /* Slide Backgrounds */
+        .slide-dark {
+            background: linear-gradient(135deg, var(--blacklock-charcoal) 0%, var(--blacklock-slate) 100%);
+        }
+
+        .slide-purple {
+            background: linear-gradient(135deg, var(--blacklock-purple) 0%, #5a3d7a 100%);
+        }
+
+        .slide-cream {
+            background: var(--blacklock-cream);
+            color: var(--blacklock-charcoal);
+        }
+
+        .slide-cream h3 {
+            color: var(--blacklock-purple);
+        }
+
+        /* Title Slide */
+        .title-slide {
+            text-align: center;
+            background:
+                linear-gradient(135deg, rgba(26, 26, 26, 0.95) 0%, rgba(45, 45, 45, 0.9) 100%),
+                url('assets/screenshot-current.png') center/cover;
+        }
+
+        .title-slide .logo-container {
+            margin-bottom: 3rem;
+        }
+
+        .title-slide .logo {
+            font-family: var(--font-display);
+            font-size: 2rem;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            color: var(--blacklock-cream);
+            padding: 1rem 2rem;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .title-slide h1 {
+            font-size: 5rem;
+            margin-bottom: 1rem;
+        }
+
+        .title-slide .tagline {
+            font-size: 1.8rem;
+            font-style: italic;
+            opacity: 0.7;
+            margin-bottom: 3rem;
+        }
+
+        .title-slide .meta {
+            position: absolute;
+            bottom: 60px;
+            display: flex;
+            gap: 3rem;
+            font-size: 0.9rem;
+            opacity: 0.6;
+        }
+
+        /* Two Column Layout */
+        .two-col {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            width: 100%;
+            max-width: 1400px;
+            align-items: start;
+        }
+
+        .col {
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Cards */
+        .card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .slide-cream .card {
+            background: white;
+            border: 1px solid rgba(0, 0, 0, 0.08);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+        }
+
+        .card-title {
+            font-family: var(--font-display);
+            font-size: 1.3rem;
+            margin-bottom: 0.75rem;
+            color: var(--blacklock-purple-light);
+        }
+
+        .slide-cream .card-title {
+            color: var(--blacklock-purple);
+        }
+
+        .card p, .card li {
+            font-size: 1rem;
+            line-height: 1.6;
+            opacity: 0.85;
+        }
+
+        /* Lists */
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        li {
+            position: relative;
+            padding-left: 1.5rem;
+            margin-bottom: 0.75rem;
+            font-size: 1.1rem;
+            line-height: 1.5;
+        }
+
+        li::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0.5em;
+            width: 6px;
+            height: 6px;
+            background: var(--blacklock-purple-light);
+            border-radius: 50%;
+        }
+
+        .slide-cream li::before {
+            background: var(--blacklock-purple);
+        }
+
+        /* Competitor Grid */
+        .competitor-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
+            width: 100%;
+            max-width: 1400px;
+        }
+
+        .competitor-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 12px;
+            padding: 1.5rem;
+            text-align: center;
+        }
+
+        .competitor-card h4 {
+            font-family: var(--font-display);
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .competitor-card .tier {
+            font-size: 0.85rem;
+            opacity: 0.6;
+            margin-bottom: 1rem;
+        }
+
+        .competitor-card .price {
+            font-size: 1.1rem;
+            color: var(--blacklock-gold);
+            margin-bottom: 0.75rem;
+        }
+
+        .competitor-card ul {
+            text-align: left;
+            font-size: 0.9rem;
+        }
+
+        .competitor-card li {
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Direction Slides */
+        .direction-number {
+            font-family: var(--font-display);
+            font-size: 8rem;
+            font-weight: 700;
+            opacity: 0.1;
+            position: absolute;
+            top: 40px;
+            right: 80px;
+        }
+
+        .direction-content {
+            max-width: 900px;
+            width: 100%;
+        }
+
+        .direction-title {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .direction-label {
+            background: var(--blacklock-purple);
+            color: white;
+            padding: 0.3rem 1rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        .slide-cream .direction-label {
+            background: var(--blacklock-charcoal);
+        }
+
+        .visual-examples {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .visual-box {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            padding: 1.5rem;
+            text-align: center;
+        }
+
+        .slide-cream .visual-box {
+            background: white;
+            border: 1px solid rgba(0, 0, 0, 0.08);
+        }
+
+        .visual-box-icon {
+            font-size: 2rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .visual-box h5 {
+            font-family: var(--font-display);
+            font-size: 1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .visual-box p {
+            font-size: 0.85rem;
+            opacity: 0.7;
+            max-width: none;
+        }
+
+        /* Recommendation Slide */
+        .recommendation-highlight {
+            background: var(--blacklock-purple);
+            color: white;
+            padding: 3rem;
+            border-radius: 16px;
+            max-width: 900px;
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .recommendation-highlight h3 {
+            color: white;
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .recommendation-highlight p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            max-width: none;
+        }
+
+        /* Quick Wins */
+        .wins-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            width: 100%;
+            max-width: 1200px;
+        }
+
+        .win-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 2rem;
+        }
+
+        .win-number {
+            font-family: var(--font-display);
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--blacklock-purple-light);
+            margin-bottom: 1rem;
+        }
+
+        .win-card h4 {
+            font-family: var(--font-display);
+            font-size: 1.2rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .win-card p {
+            font-size: 0.95rem;
+            opacity: 0.8;
+            max-width: none;
+        }
+
+        /* CTA Slide */
+        .cta-slide {
+            text-align: center;
+        }
+
+        .cta-slide h2 {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: var(--blacklock-purple);
+            color: white;
+            padding: 1rem 3rem;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 500;
+            text-decoration: none;
+            margin-top: 2rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(127, 84, 179, 0.3);
+        }
+
+        .contact-info {
+            margin-top: 3rem;
+            opacity: 0.7;
+        }
+
+        .contact-info p {
+            font-size: 1rem;
+            margin-bottom: 0.5rem;
+            max-width: none;
+        }
+
+        /* Navigation */
+        .nav {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            z-index: 100;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(10px);
+            padding: 0.75rem 1.5rem;
+            border-radius: 50px;
+        }
+
+        .nav-btn {
+            background: rgba(255, 255, 255, 0.1);
+            border: none;
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.3s ease;
+        }
+
+        .nav-btn:hover {
+            background: var(--blacklock-purple);
+        }
+
+        .nav-dots {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .nav-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            cursor: pointer;
+            transition: background 0.3s ease, transform 0.3s ease;
+        }
+
+        .nav-dot.active {
+            background: var(--blacklock-purple-light);
+            transform: scale(1.3);
+        }
+
+        .slide-counter {
+            font-size: 0.9rem;
+            opacity: 0.6;
+            min-width: 50px;
+            text-align: center;
+        }
+
+        /* Logo exploration grid */
+        .logo-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin-top: 2rem;
+            width: 100%;
+            max-width: 1000px;
+        }
+
+        .logo-option {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .logo-preview {
+            font-family: var(--font-display);
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            padding: 1.5rem;
+            border-radius: 8px;
+        }
+
+        .logo-option h5 {
+            font-size: 1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .logo-option p {
+            font-size: 0.85rem;
+            opacity: 0.7;
+            max-width: none;
+        }
+
+        /* Decorative elements */
+        .divider {
+            width: 60px;
+            height: 3px;
+            background: var(--blacklock-purple);
+            margin: 2rem 0;
+        }
+
+        .quote {
+            font-family: var(--font-display);
+            font-size: 1.5rem;
+            font-style: italic;
+            opacity: 0.8;
+            border-left: 3px solid var(--blacklock-purple);
+            padding-left: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        /* Responsive */
+        @media (max-width: 1200px) {
+            .slide {
+                padding: 40px;
+            }
+
+            h1 {
+                font-size: 3rem;
+            }
+
+            h2 {
+                font-size: 2.2rem;
+            }
+
+            .two-col {
+                gap: 40px;
+            }
+
+            .competitor-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .wins-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .visual-examples {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .two-col {
+                grid-template-columns: 1fr;
+            }
+
+            .competitor-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .wins-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .logo-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="slides-container">
+
+        <!-- Slide 1: Title -->
+        <div class="slide slide-dark title-slide active" data-slide="1">
+            <div class="logo-container">
+                <div class="logo">BLACKLOCK</div>
+            </div>
+            <h1>Brand Evolution <span class="accent-purple">Partnership</span></h1>
+            <p class="tagline">"Chop Love" - Reimagined for the Next Chapter</p>
+            <p class="subtitle">A strategic brand exploration for London's beloved chophouse</p>
+            <div class="meta">
+                <span>Prepared by Maad House</span>
+                <span>February 2026</span>
+                <span>Confidential</span>
+            </div>
+        </div>
+
+        <!-- Slide 2: Current Brand Identity -->
+        <div class="slide slide-dark" data-slide="2">
+            <h2>Your Brand <span class="accent-purple">Today</span></h2>
+            <div class="two-col">
+                <div class="col">
+                    <div class="card">
+                        <div class="card-title">The Blacklock Story</div>
+                        <p>From a former Soho brothel in 2015 to 7 beloved locations across the UK - you've revived the pre-war British chophouse tradition with extraordinary success.</p>
+                    </div>
+                    <div class="card">
+                        <div class="card-title">Brand Assets</div>
+                        <ul>
+                            <li>Heritage-inspired wordmark</li>
+                            <li>Charcoal & slate palette with purple accent</li>
+                            <li>"Chop Love" as emotional anchor</li>
+                            <li>Basement speakeasy atmosphere</li>
+                            <li>B Corp certification</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card">
+                        <div class="card-title">What's Working</div>
+                        <ul>
+                            <li>Distinctive positioning (chophouse vs steakhouse)</li>
+                            <li>Founder story resonates (lawyer to restaurateur)</li>
+                            <li>Value proposition is clear and compelling</li>
+                            <li>Sunday roast books months in advance</li>
+                            <li>Sharing format creates social moments</li>
+                        </ul>
+                    </div>
+                    <div class="card">
+                        <div class="card-title">The Opportunity</div>
+                        <p>As you expand regionally, your brand identity can evolve to better communicate your heritage, quality, and values - while maintaining the warmth that makes Blacklock special.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 3: Strengths & Opportunities -->
+        <div class="slide slide-cream" data-slide="3">
+            <h2>Strengths & <span class="accent-purple">Opportunities</span></h2>
+            <div class="two-col">
+                <div class="col">
+                    <h3>Core Strengths</h3>
+                    <div class="card">
+                        <ul>
+                            <li><strong>Heritage authenticity</strong> - You're not playing at tradition, you've researched and revived it</li>
+                            <li><strong>Value positioning</strong> - "Hawksmoor quality at accessible prices" is powerful</li>
+                            <li><strong>Purple differentiation</strong> - Unexpected in the steakhouse space</li>
+                            <li><strong>Sharing format</strong> - Creates theatre and social moments</li>
+                            <li><strong>People-first culture</strong> - Genuine values attract loyalty</li>
+                            <li><strong>Founder narrative</strong> - Gordon's story humanizes the brand</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col">
+                    <h3>Evolution Opportunities</h3>
+                    <div class="card">
+                        <ul>
+                            <li><strong>Heritage expression</strong> - Visual identity could better reflect 1690s chophouse roots</li>
+                            <li><strong>Purple underutilized</strong> - Your distinctive color deserves more prominence</li>
+                            <li><strong>Regional consistency</strong> - Manchester & Birmingham need cohesive brand application</li>
+                            <li><strong>Digital presence</strong> - Website feels dated vs positioning</li>
+                            <li><strong>Storytelling</strong> - Warren family sourcing, B Corp values underplayed</li>
+                            <li><strong>Typography</strong> - Could better balance heritage with modernity</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 4: Competitive Landscape -->
+        <div class="slide slide-dark" data-slide="4">
+            <h2>Competitive <span class="accent-purple">Landscape</span></h2>
+            <p style="margin-bottom: 2rem; text-align: center; max-width: 800px;">Understanding your positioning among London's steak and chop destinations</p>
+            <div class="competitor-grid">
+                <div class="competitor-card">
+                    <h4>CUT at 45 Park Lane</h4>
+                    <div class="tier">Ultra-Premium</div>
+                    <div class="price">£££££</div>
+                    <ul>
+                        <li>Wolfgang Puck concept</li>
+                        <li>Wagyu, USDA Prime</li>
+                        <li>Dorchester Collection</li>
+                        <li>Damien Hirst art</li>
+                    </ul>
+                </div>
+                <div class="competitor-card">
+                    <h4>Hawksmoor</h4>
+                    <div class="tier">Premium</div>
+                    <div class="price">££££</div>
+                    <ul>
+                        <li>British beef focus</li>
+                        <li>Gold & black brand</li>
+                        <li>International expansion</li>
+                        <li>Blacklock investor</li>
+                    </ul>
+                </div>
+                <div class="competitor-card" style="border: 2px solid var(--blacklock-purple);">
+                    <h4 style="color: var(--blacklock-purple-light);">Blacklock</h4>
+                    <div class="tier">Accessible Premium</div>
+                    <div class="price">£££</div>
+                    <ul>
+                        <li>Chophouse heritage</li>
+                        <li>Sharing format</li>
+                        <li>Basement atmosphere</li>
+                        <li>Value positioning</li>
+                    </ul>
+                </div>
+                <div class="competitor-card">
+                    <h4>Flat Iron</h4>
+                    <div class="tier">Accessible</div>
+                    <div class="price">££</div>
+                    <ul>
+                        <li>"Steak for everyone"</li>
+                        <li>Single cut focus</li>
+                        <li>16+ locations</li>
+                        <li>No-frills service</li>
+                    </ul>
+                </div>
+            </div>
+            <p style="margin-top: 2rem; opacity: 0.7; text-align: center;">Your sweet spot: British heritage + quality comparable to Hawksmoor + accessible atmosphere</p>
+        </div>
+
+        <!-- Slide 5: Direction 1 - Refined Evolution -->
+        <div class="slide slide-dark" data-slide="5">
+            <div class="direction-number">01</div>
+            <div class="direction-content">
+                <div class="direction-title">
+                    <span class="direction-label">Direction One</span>
+                </div>
+                <h2>Refined <span class="accent-purple">Evolution</span></h2>
+                <p>Elevate the current identity with subtle refinements that increase sophistication while maintaining warmth and accessibility.</p>
+
+                <div class="visual-examples">
+                    <div class="visual-box">
+                        <div class="visual-box-icon">Aa</div>
+                        <h5>Typography Polish</h5>
+                        <p>Refine the wordmark with improved kerning, introduce a complementary serif for body copy</p>
+                    </div>
+                    <div class="visual-box">
+                        <div class="visual-box-icon" style="color: var(--blacklock-purple);">●</div>
+                        <h5>Purple Prominence</h5>
+                        <p>Elevate your distinctive purple from accent to primary, owning the color in the category</p>
+                    </div>
+                    <div class="visual-box">
+                        <div class="visual-box-icon">📸</div>
+                        <h5>Photography Direction</h5>
+                        <p>Consistent visual language emphasizing theatre, fire, and social moments</p>
+                    </div>
+                </div>
+
+                <div class="quote" style="margin-top: 2rem;">
+                    "Same heart, sharper presentation"
+                </div>
+
+                <ul style="margin-top: 1.5rem; display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem 2rem;">
+                    <li>Low risk, high impact</li>
+                    <li>Maintains brand equity</li>
+                    <li>Faster to implement</li>
+                    <li>Customer continuity</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Slide 6: Direction 2 - Heritage Reinvented -->
+        <div class="slide slide-purple" data-slide="6">
+            <div class="direction-number" style="opacity: 0.15;">02</div>
+            <div class="direction-content">
+                <div class="direction-title">
+                    <span class="direction-label" style="background: white; color: var(--blacklock-purple);">Direction Two</span>
+                </div>
+                <h2>Heritage <span style="color: var(--blacklock-gold);">Reinvented</span></h2>
+                <p>Lean fully into the 1690s chophouse heritage with a visual identity that transports guests to a reimagined pre-war London.</p>
+
+                <div class="visual-examples">
+                    <div class="visual-box" style="background: rgba(0,0,0,0.2); border-color: rgba(255,255,255,0.2);">
+                        <div class="visual-box-icon">🏛️</div>
+                        <h5>Victorian Typography</h5>
+                        <p>Hand-drawn serif wordmark with period-appropriate flourishes and character</p>
+                    </div>
+                    <div class="visual-box" style="background: rgba(0,0,0,0.2); border-color: rgba(255,255,255,0.2);">
+                        <div class="visual-box-icon">🔥</div>
+                        <h5>Artisan Elements</h5>
+                        <p>Custom illustrations of cuts, coal fires, and butcher tools as brand assets</p>
+                    </div>
+                    <div class="visual-box" style="background: rgba(0,0,0,0.2); border-color: rgba(255,255,255,0.2);">
+                        <div class="visual-box-icon">📜</div>
+                        <h5>Texture & Patina</h5>
+                        <p>Aged paper textures, stamp marks, and weathered finishes throughout</p>
+                    </div>
+                </div>
+
+                <div class="quote" style="margin-top: 2rem; border-color: var(--blacklock-gold);">
+                    "The chophouse tradition, authentically reimagined"
+                </div>
+
+                <ul style="margin-top: 1.5rem; display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem 2rem;">
+                    <li>Strong differentiation</li>
+                    <li>Rich storytelling potential</li>
+                    <li>Deeper heritage connection</li>
+                    <li>Premium perception lift</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Slide 7: Direction 3 - Modern British -->
+        <div class="slide slide-cream" data-slide="7">
+            <div class="direction-number" style="color: var(--blacklock-charcoal);">03</div>
+            <div class="direction-content">
+                <div class="direction-title">
+                    <span class="direction-label">Direction Three</span>
+                </div>
+                <h2>Modern <span class="accent-purple">British</span></h2>
+                <p>Position Blacklock as the contemporary voice of British meat culture - confident, bold, and unmistakably British without being nostalgic.</p>
+
+                <div class="visual-examples">
+                    <div class="visual-box">
+                        <div class="visual-box-icon">⬛</div>
+                        <h5>Bold Minimalism</h5>
+                        <p>Strong geometric wordmark, confident negative space, contemporary confidence</p>
+                    </div>
+                    <div class="visual-box">
+                        <div class="visual-box-icon" style="color: var(--blacklock-purple);">🇬🇧</div>
+                        <h5>British Pride</h5>
+                        <p>Celebrate British sourcing, B Corp values, and the Warren family partnership</p>
+                    </div>
+                    <div class="visual-box">
+                        <div class="visual-box-icon">📱</div>
+                        <h5>Digital-First</h5>
+                        <p>Identity designed for social, mobile, and digital-first customer journey</p>
+                    </div>
+                </div>
+
+                <div class="quote" style="margin-top: 2rem;">
+                    "The new British chophouse for a new generation"
+                </div>
+
+                <ul style="margin-top: 1.5rem; display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem 2rem;">
+                    <li>Future-proofed identity</li>
+                    <li>Appeals to younger diners</li>
+                    <li>Scalable for growth</li>
+                    <li>Values-forward positioning</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Slide 8: Recommendation -->
+        <div class="slide slide-dark" data-slide="8">
+            <h2>Our <span class="accent-purple">Recommendation</span></h2>
+
+            <div class="recommendation-highlight">
+                <h3>Direction 2: Heritage Reinvented</h3>
+                <p>With elements of Direction 1's polish</p>
+            </div>
+
+            <div class="two-col" style="max-width: 1100px;">
+                <div class="col">
+                    <h3 style="font-size: 1.3rem;">Why This Works</h3>
+                    <ul>
+                        <li><strong>Ownable positioning</strong> - No one else can claim the chophouse heritage</li>
+                        <li><strong>Competitive moat</strong> - Creates clear separation from Hawksmoor and Flat Iron</li>
+                        <li><strong>Story-rich</strong> - Endless content opportunities around history and tradition</li>
+                        <li><strong>Scalable authenticity</strong> - Heritage translates to any location</li>
+                    </ul>
+                </div>
+                <div class="col">
+                    <h3 style="font-size: 1.3rem;">The Hybrid Approach</h3>
+                    <ul>
+                        <li><strong>Heritage depth</strong> from Direction 2's research and storytelling</li>
+                        <li><strong>Modern execution</strong> from Direction 1's polish and refinement</li>
+                        <li><strong>Purple prominence</strong> as the distinctive thread throughout</li>
+                        <li><strong>B Corp integration</strong> as proof of genuine values</li>
+                    </ul>
+                </div>
+            </div>
+
+            <p style="margin-top: 2rem; text-align: center; opacity: 0.8;">This positions Blacklock as the definitive authority on British chop culture - authentic, accessible, and unmistakably yours.</p>
+        </div>
+
+        <!-- Slide 9: Logo Exploration -->
+        <div class="slide slide-dark" data-slide="9">
+            <h2>Logo <span class="accent-purple">Exploration</span></h2>
+            <p style="margin-bottom: 1rem; text-align: center;">Optional directions for wordmark evolution</p>
+
+            <div class="logo-grid">
+                <div class="logo-option">
+                    <div class="logo-preview" style="background: var(--blacklock-charcoal); border: 1px solid var(--blacklock-purple); letter-spacing: 0.2em;">
+                        BLACKLOCK
+                    </div>
+                    <h5>Refined Classic</h5>
+                    <p>Current wordmark with improved kerning and subtle purple underline accent</p>
+                </div>
+                <div class="logo-option">
+                    <div class="logo-preview" style="background: var(--blacklock-charcoal); font-family: Georgia, serif; font-weight: 700; font-style: italic;">
+                        Blacklock
+                    </div>
+                    <h5>Heritage Script</h5>
+                    <p>Victorian-inspired serif with hand-drawn character and period authenticity</p>
+                </div>
+                <div class="logo-option">
+                    <div class="logo-preview" style="background: var(--blacklock-purple); color: white; font-weight: 600;">
+                        BLACKLOCK
+                    </div>
+                    <h5>Purple-Forward</h5>
+                    <p>Bold ownership of purple as primary brand color with confident sans-serif</p>
+                </div>
+            </div>
+
+            <div class="card" style="max-width: 800px; margin-top: 2rem; text-align: center;">
+                <p>These explorations would be developed further with full monograms, secondary lockups, and application guidelines. The goal: a wordmark as distinctive as your chops.</p>
+            </div>
+        </div>
+
+        <!-- Slide 10: Quick Wins -->
+        <div class="slide slide-dark" data-slide="10">
+            <h2>Quick <span class="accent-purple">Wins</span></h2>
+            <p style="margin-bottom: 2rem; text-align: center;">Immediate improvements before any major rebrand</p>
+
+            <div class="wins-grid">
+                <div class="win-card">
+                    <div class="win-number">01</div>
+                    <h4>Website Refresh</h4>
+                    <p>Modern booking flow, improved typography hierarchy, and mobile-first photography that matches your in-restaurant quality.</p>
+                </div>
+                <div class="win-card">
+                    <div class="win-number">02</div>
+                    <h4>Social Templates</h4>
+                    <p>Consistent Instagram and TikTok templates that capture the theatre of sharing platters and Sunday roasts.</p>
+                </div>
+                <div class="win-card">
+                    <div class="win-number">03</div>
+                    <h4>Menu Design</h4>
+                    <p>Heritage-inspired menus that tell your story - the Warren family, the tradition, the technique - while guests browse.</p>
+                </div>
+                <div class="win-card">
+                    <div class="win-number">04</div>
+                    <h4>Regional Guidelines</h4>
+                    <p>Brand guidelines ensuring Manchester and Birmingham deliver the same visual experience as Soho.</p>
+                </div>
+                <div class="win-card">
+                    <div class="win-number">05</div>
+                    <h4>B Corp Storytelling</h4>
+                    <p>Make your certification work harder - in-venue signage, website content, and social proof of your values.</p>
+                </div>
+                <div class="win-card">
+                    <div class="win-number">06</div>
+                    <h4>Email & Loyalty</h4>
+                    <p>Beautiful branded communications that keep "Chop Love" alive between visits and reward your regulars.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 11: CTA -->
+        <div class="slide slide-purple cta-slide" data-slide="11">
+            <h2>Let's Talk <span style="color: var(--blacklock-gold);">Chops</span></h2>
+            <p style="font-size: 1.3rem; max-width: 700px; margin: 0 auto;">
+                We'd love to explore how Maad House can help Blacklock own its heritage and grow into its next chapter.
+            </p>
+
+            <a href="mailto:hello@maad.house?subject=Blacklock%20x%20Maad%20House" class="cta-button">
+                Start the Conversation
+            </a>
+
+            <div class="contact-info">
+                <p><strong>Maad House</strong></p>
+                <p>hello@maad.house</p>
+                <p>maad.house</p>
+            </div>
+
+            <div style="position: absolute; bottom: 60px; opacity: 0.5; font-size: 0.9rem;">
+                <p>Prepared with 🔥 for Gordon Ker and the Blacklock team</p>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Navigation -->
+    <nav class="nav">
+        <button class="nav-btn" id="prev-btn">←</button>
+        <div class="nav-dots" id="nav-dots"></div>
+        <span class="slide-counter" id="slide-counter">1 / 11</span>
+        <button class="nav-btn" id="next-btn">→</button>
+    </nav>
+
+    <script>
+        const slides = document.querySelectorAll('.slide');
+        const totalSlides = slides.length;
+        let currentSlide = 1;
+
+        // Initialize navigation dots
+        const dotsContainer = document.getElementById('nav-dots');
+        for (let i = 1; i <= totalSlides; i++) {
+            const dot = document.createElement('div');
+            dot.className = `nav-dot ${i === 1 ? 'active' : ''}`;
+            dot.addEventListener('click', () => goToSlide(i));
+            dotsContainer.appendChild(dot);
+        }
+
+        function updateSlide() {
+            slides.forEach((slide, index) => {
+                slide.classList.toggle('active', index + 1 === currentSlide);
+            });
+
+            document.querySelectorAll('.nav-dot').forEach((dot, index) => {
+                dot.classList.toggle('active', index + 1 === currentSlide);
+            });
+
+            document.getElementById('slide-counter').textContent = `${currentSlide} / ${totalSlides}`;
+        }
+
+        function goToSlide(n) {
+            currentSlide = n;
+            if (currentSlide > totalSlides) currentSlide = 1;
+            if (currentSlide < 1) currentSlide = totalSlides;
+            updateSlide();
+        }
+
+        function nextSlide() {
+            goToSlide(currentSlide + 1);
+        }
+
+        function prevSlide() {
+            goToSlide(currentSlide - 1);
+        }
+
+        // Button navigation
+        document.getElementById('next-btn').addEventListener('click', nextSlide);
+        document.getElementById('prev-btn').addEventListener('click', prevSlide);
+
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight' || e.key === ' ') {
+                e.preventDefault();
+                nextSlide();
+            } else if (e.key === 'ArrowLeft') {
+                e.preventDefault();
+                prevSlide();
+            } else if (e.key >= '1' && e.key <= '9') {
+                const num = parseInt(e.key);
+                if (num <= totalSlides) goToSlide(num);
+            } else if (e.key === '0') {
+                goToSlide(10);
+            }
+        });
+
+        // Touch/swipe support
+        let touchStartX = 0;
+        let touchEndX = 0;
+
+        document.addEventListener('touchstart', (e) => {
+            touchStartX = e.changedTouches[0].screenX;
+        });
+
+        document.addEventListener('touchend', (e) => {
+            touchEndX = e.changedTouches[0].screenX;
+            if (touchStartX - touchEndX > 50) {
+                nextSlide();
+            } else if (touchEndX - touchStartX > 50) {
+                prevSlide();
+            }
+        });
+    </script>
+</body>
+</html>
