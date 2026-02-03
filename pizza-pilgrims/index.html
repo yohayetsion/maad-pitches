@@ -1,0 +1,1381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pizza Pilgrims - Brand Strategy | Maad House</title>
+    <link rel="icon" type="image/png" href="https://www.google.com/s2/favicons?domain=pizzapilgrims.co.uk&sz=64">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,700;1,9..40,400&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* Maad House Brand */
+            --mh-black: #1a1a1a;
+            --mh-dark: #2d2d2d;
+            --mh-accent: #e63946;
+            --mh-white: #ffffff;
+            --mh-gray: #888888;
+            --mh-light-gray: #f5f5f5;
+
+            /* Pizza Pilgrims Brand */
+            --pp-green: #00572E;
+            --pp-bright-green: #00CC00;
+            --pp-white: #ffffff;
+            --pp-cream: #f9f7f4;
+
+            /* Competitor Colors */
+            --fm-red: #E02B28;
+            --fm-teal: #00A699;
+            --hs-cream: #DEC1A1;
+            --sm-black: #0D0D0D;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background: var(--mh-black);
+            color: var(--mh-white);
+            overflow: hidden;
+        }
+
+        /* Slide Container */
+        .slides-container {
+            width: 100vw;
+            height: 100vh;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 60px 80px;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.5s ease, visibility 0.5s ease;
+        }
+
+        .slide.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* Slide Variants */
+        .slide--dark {
+            background: var(--mh-black);
+            color: var(--mh-white);
+        }
+
+        .slide--light {
+            background: var(--mh-light-gray);
+            color: var(--mh-black);
+        }
+
+        .slide--accent {
+            background: var(--mh-accent);
+            color: var(--mh-white);
+        }
+
+        .slide--client {
+            background: var(--pp-green);
+            color: var(--mh-white);
+        }
+
+        .slide--client-light {
+            background: var(--pp-cream);
+            color: var(--mh-black);
+        }
+
+        /* Typography */
+        h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 4rem;
+            font-weight: 600;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+        }
+
+        h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            font-weight: 500;
+            margin-bottom: 1rem;
+        }
+
+        h3 {
+            font-family: 'DM Sans', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        p {
+            font-size: 1.25rem;
+            line-height: 1.6;
+            max-width: 800px;
+        }
+
+        .subtitle {
+            font-size: 1.5rem;
+            opacity: 0.8;
+            margin-bottom: 2rem;
+        }
+
+        .label {
+            font-size: 0.875rem;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            opacity: 0.6;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Navigation */
+        .nav {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 15px;
+            align-items: center;
+            z-index: 100;
+        }
+
+        .nav-btn {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            border: 2px solid rgba(255,255,255,0.3);
+            background: rgba(0,0,0,0.3);
+            color: white;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .nav-btn:hover {
+            background: var(--mh-accent);
+            border-color: var(--mh-accent);
+        }
+
+        .nav-btn svg {
+            width: 20px;
+            height: 20px;
+        }
+
+        .slide-counter {
+            font-size: 0.875rem;
+            opacity: 0.6;
+            min-width: 60px;
+            text-align: center;
+        }
+
+        /* Progress Bar */
+        .progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 3px;
+            background: var(--mh-accent);
+            transition: width 0.3s ease;
+            z-index: 100;
+        }
+
+        /* Logo */
+        .logo {
+            position: fixed;
+            top: 30px;
+            left: 40px;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--mh-white);
+            z-index: 100;
+            opacity: 0.8;
+        }
+
+        .logo span {
+            color: var(--mh-accent);
+        }
+
+        /* Title Slide */
+        .title-content {
+            text-align: center;
+            max-width: 900px;
+        }
+
+        .title-content h1 {
+            font-size: 5rem;
+            margin-bottom: 1rem;
+        }
+
+        .title-content .tagline {
+            font-size: 1.75rem;
+            opacity: 0.7;
+            margin-bottom: 3rem;
+        }
+
+        .title-content .date {
+            font-size: 1rem;
+            opacity: 0.5;
+        }
+
+        /* Two Column Layout */
+        .two-col {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            width: 100%;
+            max-width: 1400px;
+            align-items: center;
+        }
+
+        .two-col--wide-left {
+            grid-template-columns: 1.2fr 0.8fr;
+        }
+
+        .two-col--wide-right {
+            grid-template-columns: 0.8fr 1.2fr;
+        }
+
+        /* Brand Identity Card */
+        .brand-card {
+            background: var(--mh-dark);
+            border-radius: 16px;
+            padding: 40px;
+            height: 100%;
+        }
+
+        .slide--light .brand-card {
+            background: var(--mh-white);
+            box-shadow: 0 4px 30px rgba(0,0,0,0.08);
+        }
+
+        .brand-screenshot {
+            width: 100%;
+            border-radius: 12px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+        }
+
+        .color-swatches {
+            display: flex;
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .swatch {
+            width: 60px;
+            height: 60px;
+            border-radius: 8px;
+            position: relative;
+        }
+
+        .swatch::after {
+            content: attr(data-color);
+            position: absolute;
+            bottom: -25px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 0.7rem;
+            opacity: 0.6;
+            white-space: nowrap;
+        }
+
+        .typography-sample {
+            margin: 20px 0;
+        }
+
+        .font-display {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+
+        .font-body {
+            font-size: 1rem;
+            opacity: 0.8;
+        }
+
+        /* Strengths & Opportunities */
+        .strengths-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            width: 100%;
+            max-width: 1200px;
+        }
+
+        .strengths-col h3 {
+            margin-bottom: 25px;
+            color: var(--pp-bright-green);
+        }
+
+        .strengths-col--opp h3 {
+            color: var(--mh-accent);
+        }
+
+        .strength-item {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px;
+            align-items: flex-start;
+        }
+
+        .strength-icon {
+            width: 24px;
+            height: 24px;
+            flex-shrink: 0;
+            margin-top: 3px;
+        }
+
+        .strength-text {
+            font-size: 1.1rem;
+            line-height: 1.5;
+        }
+
+        .strength-text strong {
+            display: block;
+            margin-bottom: 4px;
+        }
+
+        /* Competitor Grid */
+        .competitor-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            width: 100%;
+            max-width: 1200px;
+        }
+
+        .competitor-card {
+            background: var(--mh-dark);
+            border-radius: 16px;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .slide--light .competitor-card {
+            background: var(--mh-white);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+
+        .competitor-logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+            padding: 15px;
+            border-radius: 8px;
+        }
+
+        .competitor-card--fm .competitor-logo {
+            background: var(--fm-red);
+            color: white;
+        }
+
+        .competitor-card--hs .competitor-logo {
+            background: var(--hs-cream);
+            color: var(--mh-black);
+        }
+
+        .competitor-card--sm .competitor-logo {
+            background: var(--sm-black);
+            color: white;
+        }
+
+        .competitor-tagline {
+            font-style: italic;
+            opacity: 0.7;
+            margin-bottom: 15px;
+            font-size: 0.95rem;
+        }
+
+        .competitor-stats {
+            font-size: 0.9rem;
+            opacity: 0.6;
+        }
+
+        .competitor-threat {
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            font-size: 0.85rem;
+            text-align: left;
+        }
+
+        .slide--light .competitor-threat {
+            border-color: rgba(0,0,0,0.1);
+        }
+
+        /* Direction Cards */
+        .direction-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .direction-number {
+            font-size: 0.875rem;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            opacity: 0.5;
+            margin-bottom: 10px;
+        }
+
+        .direction-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            width: 100%;
+            max-width: 1200px;
+        }
+
+        .direction-description {
+            font-size: 1.15rem;
+            line-height: 1.7;
+            opacity: 0.9;
+        }
+
+        .direction-elements {
+            background: rgba(255,255,255,0.05);
+            border-radius: 12px;
+            padding: 30px;
+        }
+
+        .slide--light .direction-elements {
+            background: rgba(0,0,0,0.03);
+        }
+
+        .direction-elements h4 {
+            font-size: 0.875rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 20px;
+            opacity: 0.6;
+        }
+
+        .element-list {
+            list-style: none;
+        }
+
+        .element-list li {
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            font-size: 1rem;
+        }
+
+        .slide--light .element-list li {
+            border-color: rgba(0,0,0,0.1);
+        }
+
+        .element-list li:last-child {
+            border-bottom: none;
+        }
+
+        /* Recommendation Slide */
+        .recommendation-content {
+            text-align: center;
+            max-width: 900px;
+        }
+
+        .recommendation-badge {
+            display: inline-block;
+            background: var(--mh-accent);
+            color: white;
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-size: 0.875rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 30px;
+        }
+
+        .recommendation-points {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+            margin-top: 40px;
+            text-align: left;
+        }
+
+        .rec-point {
+            display: flex;
+            gap: 15px;
+            align-items: flex-start;
+        }
+
+        .rec-point-num {
+            width: 32px;
+            height: 32px;
+            background: var(--pp-green);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 0.875rem;
+            flex-shrink: 0;
+        }
+
+        /* Logo Exploration */
+        .logo-exploration {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+            width: 100%;
+            max-width: 1100px;
+        }
+
+        .logo-concept {
+            background: var(--mh-dark);
+            border-radius: 16px;
+            padding: 40px 30px;
+            text-align: center;
+        }
+
+        .slide--light .logo-concept {
+            background: var(--mh-white);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+
+        .logo-visual {
+            height: 120px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 25px;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            font-weight: 600;
+        }
+
+        .logo-concept--refined .logo-visual {
+            color: var(--pp-green);
+            border-bottom: 3px solid var(--pp-bright-green);
+            padding-bottom: 10px;
+        }
+
+        .logo-concept--heritage .logo-visual {
+            background: var(--pp-green);
+            color: white;
+            border-radius: 8px;
+            padding: 20px;
+        }
+
+        .logo-concept--modern .logo-visual {
+            color: var(--pp-green);
+            letter-spacing: 0.05em;
+        }
+
+        .logo-concept h4 {
+            font-size: 1rem;
+            margin-bottom: 10px;
+        }
+
+        .logo-concept p {
+            font-size: 0.9rem;
+            opacity: 0.7;
+        }
+
+        /* Quick Wins - Annotated Screenshot */
+        .annotated-container {
+            position: relative;
+            width: 100%;
+            max-width: 1200px;
+        }
+
+        .annotated-screenshot {
+            width: 65%;
+            border-radius: 12px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+        }
+
+        .annotation {
+            position: absolute;
+            background: var(--mh-accent);
+            color: white;
+            padding: 12px 18px;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            max-width: 250px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        }
+
+        .annotation::before {
+            content: '';
+            position: absolute;
+            width: 60px;
+            height: 2px;
+            background: var(--mh-accent);
+        }
+
+        .annotation--1 {
+            top: 5%;
+            right: 5%;
+        }
+
+        .annotation--1::before {
+            bottom: 50%;
+            left: -60px;
+        }
+
+        .annotation--2 {
+            top: 35%;
+            right: 5%;
+        }
+
+        .annotation--2::before {
+            bottom: 50%;
+            left: -60px;
+        }
+
+        .annotation--3 {
+            bottom: 25%;
+            right: 5%;
+        }
+
+        .annotation--3::before {
+            top: 50%;
+            left: -60px;
+        }
+
+        .annotation--4 {
+            bottom: 5%;
+            right: 5%;
+        }
+
+        .annotation--4::before {
+            top: 50%;
+            left: -60px;
+        }
+
+        /* CTA Slide */
+        .cta-content {
+            text-align: center;
+            max-width: 800px;
+        }
+
+        .cta-content h1 {
+            margin-bottom: 30px;
+        }
+
+        .cta-content p {
+            font-size: 1.5rem;
+            margin-bottom: 40px;
+            opacity: 0.9;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: var(--mh-white);
+            color: var(--mh-black);
+            padding: 18px 50px;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+
+        .cta-contact {
+            margin-top: 50px;
+            opacity: 0.7;
+        }
+
+        .cta-contact a {
+            color: inherit;
+        }
+
+        /* Market Position Map */
+        .market-map {
+            width: 100%;
+            max-width: 700px;
+            aspect-ratio: 1;
+            position: relative;
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 8px;
+        }
+
+        .slide--light .market-map {
+            border-color: rgba(0,0,0,0.15);
+        }
+
+        .market-axis {
+            position: absolute;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            opacity: 0.5;
+        }
+
+        .market-axis--top { top: 10px; left: 50%; transform: translateX(-50%); }
+        .market-axis--bottom { bottom: 10px; left: 50%; transform: translateX(-50%); }
+        .market-axis--left { left: 10px; top: 50%; transform: translateY(-50%) rotate(-90deg); }
+        .market-axis--right { right: 10px; top: 50%; transform: translateY(-50%) rotate(90deg); }
+
+        .market-brand {
+            position: absolute;
+            padding: 8px 14px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            white-space: nowrap;
+        }
+
+        .market-brand--pp {
+            background: var(--pp-green);
+            color: white;
+            top: 55%;
+            left: 60%;
+        }
+
+        .market-brand--fm {
+            background: var(--fm-red);
+            color: white;
+            top: 70%;
+            left: 35%;
+        }
+
+        .market-brand--hs {
+            background: var(--hs-cream);
+            color: var(--mh-black);
+            top: 75%;
+            left: 65%;
+        }
+
+        .market-brand--sm {
+            background: var(--sm-black);
+            color: white;
+            top: 35%;
+            left: 70%;
+        }
+
+        .market-opportunity {
+            position: absolute;
+            top: 40%;
+            left: 55%;
+            width: 80px;
+            height: 80px;
+            border: 2px dashed var(--mh-accent);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.65rem;
+            text-align: center;
+            color: var(--mh-accent);
+        }
+
+        /* Responsive */
+        @media (max-width: 1200px) {
+            .slide {
+                padding: 40px 50px;
+            }
+
+            h1 {
+                font-size: 3rem;
+            }
+
+            .title-content h1 {
+                font-size: 3.5rem;
+            }
+
+            .two-col, .direction-content {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .competitor-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .logo-exploration {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .slide {
+                padding: 30px;
+            }
+
+            h1 {
+                font-size: 2.25rem;
+            }
+
+            .strengths-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .recommendation-points {
+                grid-template-columns: 1fr;
+            }
+
+            .annotated-screenshot {
+                width: 100%;
+            }
+
+            .annotation {
+                position: relative;
+                top: auto !important;
+                right: auto !important;
+                bottom: auto !important;
+                left: auto !important;
+                margin: 10px 0;
+                max-width: 100%;
+            }
+
+            .annotation::before {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="progress-bar" id="progress"></div>
+
+    <div class="logo">maad<span>.</span>house</div>
+
+    <div class="slides-container">
+
+        <!-- Slide 1: Title -->
+        <div class="slide slide--client active" data-slide="1">
+            <div class="title-content">
+                <p class="label">Brand Strategy Proposal</p>
+                <h1>Pizza Pilgrims</h1>
+                <p class="tagline">Elevating the Pilgrimage</p>
+                <p class="date">February 2026</p>
+            </div>
+        </div>
+
+        <!-- Slide 2: Current Brand Identity -->
+        <div class="slide slide--dark" data-slide="2">
+            <div class="two-col two-col--wide-left">
+                <div>
+                    <p class="label">Current State</p>
+                    <h2>Brand Identity</h2>
+                    <img src="https://storage.googleapis.com/firecrawl-scrape-media/screenshot-e6478496-2270-4fc3-af0f-fd5f593eb586.png" alt="Pizza Pilgrims Homepage" class="brand-screenshot">
+                </div>
+                <div class="brand-card">
+                    <h3>Visual Elements</h3>
+
+                    <p class="label" style="margin-top: 20px;">Color Palette</p>
+                    <div class="color-swatches">
+                        <div class="swatch" style="background: #00572E;" data-color="#00572E"></div>
+                        <div class="swatch" style="background: #00CC00;" data-color="#00CC00"></div>
+                        <div class="swatch" style="background: #FFFFFF; border: 1px solid #ddd;" data-color="#FFFFFF"></div>
+                    </div>
+
+                    <p class="label" style="margin-top: 30px;">Typography</p>
+                    <div class="typography-sample">
+                        <p class="font-display" style="color: var(--pp-green);">Pizza Pilgrims</p>
+                        <p class="font-body">Body: ChelseaRR Sans-serif</p>
+                    </div>
+
+                    <p class="label" style="margin-top: 30px;">Tagline</p>
+                    <p style="font-size: 1.5rem; font-style: italic; color: var(--pp-bright-green);">"In Crust We Trust"</p>
+
+                    <p class="label" style="margin-top: 30px;">Style</p>
+                    <p>Playful, high-energy, food-forward</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 3: Strengths & Opportunities -->
+        <div class="slide slide--dark" data-slide="3">
+            <p class="label" style="margin-bottom: 30px;">Analysis</p>
+            <h2 style="margin-bottom: 40px;">Strengths & Opportunities</h2>
+
+            <div class="strengths-grid">
+                <div class="strengths-col">
+                    <h3>Strengths</h3>
+
+                    <div class="strength-item">
+                        <svg class="strength-icon" viewBox="0 0 24 24" fill="none" stroke="var(--pp-bright-green)" stroke-width="2">
+                            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                            <polyline points="22 4 12 14.01 9 11.01"/>
+                        </svg>
+                        <div class="strength-text">
+                            <strong>Compelling Origin Story</strong>
+                            The pilgrimage narrative from Italy to London is unique and memorable
+                        </div>
+                    </div>
+
+                    <div class="strength-item">
+                        <svg class="strength-icon" viewBox="0 0 24 24" fill="none" stroke="var(--pp-bright-green)" stroke-width="2">
+                            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                            <polyline points="22 4 12 14.01 9 11.01"/>
+                        </svg>
+                        <div class="strength-text">
+                            <strong>Strong Mission & Values</strong>
+                            B Corp certified with Make-A-Wish partnership
+                        </div>
+                    </div>
+
+                    <div class="strength-item">
+                        <svg class="strength-icon" viewBox="0 0 24 24" fill="none" stroke="var(--pp-bright-green)" stroke-width="2">
+                            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                            <polyline points="22 4 12 14.01 9 11.01"/>
+                        </svg>
+                        <div class="strength-text">
+                            <strong>Experience-Led Brand</strong>
+                            Masterclasses, events, and Pizza in the Post kits
+                        </div>
+                    </div>
+
+                    <div class="strength-item">
+                        <svg class="strength-icon" viewBox="0 0 24 24" fill="none" stroke="var(--pp-bright-green)" stroke-width="2">
+                            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                            <polyline points="22 4 12 14.01 9 11.01"/>
+                        </svg>
+                        <div class="strength-text">
+                            <strong>Product Credibility</strong>
+                            Authentic Neapolitan technique, fresh daily dough
+                        </div>
+                    </div>
+                </div>
+
+                <div class="strengths-col strengths-col--opp">
+                    <h3>Opportunities</h3>
+
+                    <div class="strength-item">
+                        <svg class="strength-icon" viewBox="0 0 24 24" fill="none" stroke="var(--mh-accent)" stroke-width="2">
+                            <circle cx="12" cy="12" r="10"/>
+                            <line x1="12" y1="8" x2="12" y2="12"/>
+                            <line x1="12" y1="16" x2="12.01" y2="16"/>
+                        </svg>
+                        <div class="strength-text">
+                            <strong>Homepage Hierarchy</strong>
+                            Promotions lead over brand story; competing CTAs
+                        </div>
+                    </div>
+
+                    <div class="strength-item">
+                        <svg class="strength-icon" viewBox="0 0 24 24" fill="none" stroke="var(--mh-accent)" stroke-width="2">
+                            <circle cx="12" cy="12" r="10"/>
+                            <line x1="12" y1="8" x2="12" y2="12"/>
+                            <line x1="12" y1="16" x2="12.01" y2="16"/>
+                        </svg>
+                        <div class="strength-text">
+                            <strong>Founder Story Visibility</strong>
+                            "The Pilgrimage" buried below the fold
+                        </div>
+                    </div>
+
+                    <div class="strength-item">
+                        <svg class="strength-icon" viewBox="0 0 24 24" fill="none" stroke="var(--mh-accent)" stroke-width="2">
+                            <circle cx="12" cy="12" r="10"/>
+                            <line x1="12" y1="8" x2="12" y2="12"/>
+                            <line x1="12" y1="16" x2="12.01" y2="16"/>
+                        </svg>
+                        <div class="strength-text">
+                            <strong>Premium Perception</strong>
+                            Risk of being seen as "fun chain" vs. authentic Italian
+                        </div>
+                    </div>
+
+                    <div class="strength-item">
+                        <svg class="strength-icon" viewBox="0 0 24 24" fill="none" stroke="var(--mh-accent)" stroke-width="2">
+                            <circle cx="12" cy="12" r="10"/>
+                            <line x1="12" y1="8" x2="12" y2="12"/>
+                            <line x1="12" y1="16" x2="12.01" y2="16"/>
+                        </svg>
+                        <div class="strength-text">
+                            <strong>Visual Consistency</strong>
+                            Website feels dated vs. Franco Manca's recent refresh
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 4: Competitive Landscape -->
+        <div class="slide slide--light" data-slide="4">
+            <p class="label" style="margin-bottom: 30px;">Market Context</p>
+            <h2 style="margin-bottom: 40px;">Competitive Landscape</h2>
+
+            <div class="competitor-grid">
+                <div class="competitor-card competitor-card--fm">
+                    <div class="competitor-logo">Franco Manca</div>
+                    <p class="competitor-tagline">"Sourdough pizza. As it should be."</p>
+                    <p class="competitor-stats">70+ locations | Est. 2008</p>
+                    <div class="competitor-threat">
+                        <strong>Threat:</strong> Recent brand refresh, aggressive expansion, competing on value (£6-8 pizzas)
+                    </div>
+                </div>
+
+                <div class="competitor-card competitor-card--hs">
+                    <div class="competitor-logo">Homeslice</div>
+                    <p class="competitor-tagline">"Simple food done well"</p>
+                    <p class="competitor-stats">3 locations | Est. 2011</p>
+                    <div class="competitor-threat">
+                        <strong>Position:</strong> Cult following, 20" pizzas by the slice, craft beer focus
+                    </div>
+                </div>
+
+                <div class="competitor-card competitor-card--sm">
+                    <div class="competitor-logo">Santa Maria</div>
+                    <p class="competitor-tagline">"Pizzeria Napoletana"</p>
+                    <p class="competitor-stats">6 locations | Est. 2010</p>
+                    <div class="competitor-threat">
+                        <strong>Position:</strong> Purist choice, "exactly like Naples streets", credibility with enthusiasts
+                    </div>
+                </div>
+            </div>
+
+            <div style="margin-top: 40px; text-align: center;">
+                <p style="font-size: 1.1rem; opacity: 0.8; max-width: 700px; margin: 0 auto;">
+                    <strong>Key Insight:</strong> Franco Manca just invested in their brand. Pizza Pilgrims needs to evolve to maintain differentiation.
+                </p>
+            </div>
+        </div>
+
+        <!-- Slide 5: Direction 1 -->
+        <div class="slide slide--dark" data-slide="5">
+            <div class="direction-header">
+                <p class="direction-number">Direction 1</p>
+                <h2>"Elevated Pilgrimage"</h2>
+                <p class="subtitle">Refined evolution - same energy, elevated execution</p>
+            </div>
+
+            <div class="direction-content">
+                <div class="direction-description">
+                    <p>Keep the playful green palette and fun personality, but modernize typography, strengthen the founder story visibility, and elevate photography quality.</p>
+                    <br>
+                    <p><strong>Evolution, not revolution.</strong></p>
+                    <br>
+                    <p style="opacity: 0.7;">This approach addresses the opportunities identified while preserving what makes Pizza Pilgrims distinctive. Low risk - customers know and love the brand.</p>
+                </div>
+
+                <div class="direction-elements">
+                    <h4>Brand Elements</h4>
+                    <ul class="element-list">
+                        <li>Refined green palette (deeper, richer tones)</li>
+                        <li>Custom typography refresh</li>
+                        <li>Hero section leads with pilgrimage story</li>
+                        <li>Premium food photography investment</li>
+                        <li>Streamlined CTA hierarchy</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 6: Direction 2 -->
+        <div class="slide slide--client-light" data-slide="6">
+            <div class="direction-header">
+                <p class="direction-number">Direction 2</p>
+                <h2>"Napoli Roots"</h2>
+                <p class="subtitle">Authentic Neapolitan, contemporary expression</p>
+            </div>
+
+            <div class="direction-content">
+                <div class="direction-description">
+                    <p>Lean harder into the Naples origin story. Warmer Mediterranean palette, artisanal typography, craft-forward messaging.</p>
+                    <br>
+                    <p><strong>Position as the "real Neapolitan" vs. competitors.</strong></p>
+                    <br>
+                    <p style="opacity: 0.7;">Differentiates from Franco Manca's Brixton narrative. Appeals to authenticity-seeking consumers and supports premium positioning.</p>
+                </div>
+
+                <div class="direction-elements">
+                    <h4>Brand Elements</h4>
+                    <ul class="element-list">
+                        <li>Mediterranean palette (terracotta, olive, cream)</li>
+                        <li>Hand-drawn or artisanal typography</li>
+                        <li>Naples street photography</li>
+                        <li>Italian language elements</li>
+                        <li>Craft and tradition messaging</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 7: Direction 3 -->
+        <div class="slide slide--dark" data-slide="7">
+            <div class="direction-header">
+                <p class="direction-number">Direction 3</p>
+                <h2>"Community Kitchen"</h2>
+                <p class="subtitle">Your neighborhood pizza pilgrimage</p>
+            </div>
+
+            <div class="direction-content">
+                <div class="direction-description">
+                    <p>Emphasize the community aspect - local pizzerias, masterclasses, charity work, staff ("pizza pilgrims"). Each location as a community hub.</p>
+                    <br>
+                    <p><strong>Warmer, more inviting, less chain-feeling.</strong></p>
+                    <br>
+                    <p style="opacity: 0.7;">Leverages B Corp status and charity partnerships. Addresses the risk of 25+ locations feeling corporate. Supports events and experiences positioning.</p>
+                </div>
+
+                <div class="direction-elements">
+                    <h4>Brand Elements</h4>
+                    <ul class="element-list">
+                        <li>Warm earth tones with green accents</li>
+                        <li>Location-specific content & stories</li>
+                        <li>Staff and community photography</li>
+                        <li>Handwritten/personal design touches</li>
+                        <li>Local partnership highlights</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 8: Recommendation -->
+        <div class="slide slide--accent" data-slide="8">
+            <div class="recommendation-content">
+                <span class="recommendation-badge">Our Recommendation</span>
+                <h1>Direction 1 + Elements of Direction 2</h1>
+                <p>Elevate the pilgrimage story while strengthening Neapolitan credentials. Evolution that protects what works while addressing what doesn't.</p>
+
+                <div class="recommendation-points">
+                    <div class="rec-point">
+                        <span class="rec-point-num">1</span>
+                        <div>
+                            <strong>Elevate the founder story</strong><br>
+                            Make the pilgrimage narrative the hero, not buried content
+                        </div>
+                    </div>
+
+                    <div class="rec-point">
+                        <span class="rec-point-num">2</span>
+                        <div>
+                            <strong>Refine visual hierarchy</strong><br>
+                            Clear CTAs, premium photography, cleaner layout
+                        </div>
+                    </div>
+
+                    <div class="rec-point">
+                        <span class="rec-point-num">3</span>
+                        <div>
+                            <strong>Strengthen Neapolitan credentials</strong><br>
+                            Subtle Italian touches that reinforce authenticity
+                        </div>
+                    </div>
+
+                    <div class="rec-point">
+                        <span class="rec-point-num">4</span>
+                        <div>
+                            <strong>Maintain personality</strong><br>
+                            Keep the fun, pun-heavy voice that customers love
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 9: Logo Exploration -->
+        <div class="slide slide--light" data-slide="9">
+            <p class="label" style="margin-bottom: 30px;">Visual Direction</p>
+            <h2 style="margin-bottom: 50px;">Logo Evolution Concepts</h2>
+
+            <div class="logo-exploration">
+                <div class="logo-concept logo-concept--refined">
+                    <div class="logo-visual">Pizza Pilgrims</div>
+                    <h4>Refined Classic</h4>
+                    <p>Retain current mark with refined typography weight and modern proportions</p>
+                </div>
+
+                <div class="logo-concept logo-concept--heritage">
+                    <div class="logo-visual">Pizza Pilgrims</div>
+                    <h4>Heritage Mark</h4>
+                    <p>Badge-style lockup emphasizing the 2012 founding and pilgrimage journey</p>
+                </div>
+
+                <div class="logo-concept logo-concept--modern">
+                    <div class="logo-visual">PIZZA PILGRIMS</div>
+                    <h4>Contemporary</h4>
+                    <p>Cleaner, more modern treatment while maintaining brand recognition</p>
+                </div>
+            </div>
+
+            <p style="text-align: center; margin-top: 40px; opacity: 0.6; font-size: 0.9rem;">
+                These are directional concepts. Full logo development would follow brand strategy approval.
+            </p>
+        </div>
+
+        <!-- Slide 10: Quick Wins -->
+        <div class="slide slide--dark" data-slide="10">
+            <p class="label" style="margin-bottom: 20px;">Immediate Impact</p>
+            <h2 style="margin-bottom: 40px;">Quick Wins</h2>
+
+            <div class="annotated-container">
+                <img src="https://storage.googleapis.com/firecrawl-scrape-media/screenshot-e6478496-2270-4fc3-af0f-fd5f593eb586.png" alt="Pizza Pilgrims Homepage Annotated" class="annotated-screenshot">
+
+                <div class="annotation annotation--1">
+                    <strong>Hero Story</strong><br>
+                    Lead with the pilgrimage narrative, not promotions
+                </div>
+
+                <div class="annotation annotation--2">
+                    <strong>Single Primary CTA</strong><br>
+                    Reduce competing calls to action
+                </div>
+
+                <div class="annotation annotation--3">
+                    <strong>Premium Photography</strong><br>
+                    Invest in consistent, elevated food imagery
+                </div>
+
+                <div class="annotation annotation--4">
+                    <strong>Founder Visibility</strong><br>
+                    Thom & James should be above the fold
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 11: CTA -->
+        <div class="slide slide--client" data-slide="11">
+            <div class="cta-content">
+                <h1>Let's elevate the pilgrimage together</h1>
+                <p>We'd love to explore how Maad House can help Pizza Pilgrims evolve while staying true to Thom and James's original vision.</p>
+
+                <a href="mailto:hello@maad.house" class="cta-button">Start the Conversation</a>
+
+                <div class="cta-contact">
+                    <p>hello@maad.house | maad.house</p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Navigation -->
+    <nav class="nav">
+        <button class="nav-btn" id="prevBtn" aria-label="Previous slide">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="15 18 9 12 15 6"/>
+            </svg>
+        </button>
+        <span class="slide-counter"><span id="currentSlide">1</span> / <span id="totalSlides">11</span></span>
+        <button class="nav-btn" id="nextBtn" aria-label="Next slide">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="9 18 15 12 9 6"/>
+            </svg>
+        </button>
+    </nav>
+
+    <script>
+        // Slide Navigation
+        const slides = document.querySelectorAll('.slide');
+        const totalSlides = slides.length;
+        let currentSlide = 1;
+
+        const progressBar = document.getElementById('progress');
+        const currentSlideEl = document.getElementById('currentSlide');
+        const totalSlidesEl = document.getElementById('totalSlides');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+
+        totalSlidesEl.textContent = totalSlides;
+
+        function updateSlide(n) {
+            // Bounds check
+            if (n < 1) n = 1;
+            if (n > totalSlides) n = totalSlides;
+
+            currentSlide = n;
+
+            // Update slides
+            slides.forEach((slide, index) => {
+                slide.classList.toggle('active', index === currentSlide - 1);
+            });
+
+            // Update counter
+            currentSlideEl.textContent = currentSlide;
+
+            // Update progress bar
+            const progress = ((currentSlide - 1) / (totalSlides - 1)) * 100;
+            progressBar.style.width = progress + '%';
+
+            // Update button states
+            prevBtn.style.opacity = currentSlide === 1 ? 0.3 : 1;
+            nextBtn.style.opacity = currentSlide === totalSlides ? 0.3 : 1;
+        }
+
+        function nextSlide() {
+            if (currentSlide < totalSlides) {
+                updateSlide(currentSlide + 1);
+            }
+        }
+
+        function prevSlide() {
+            if (currentSlide > 1) {
+                updateSlide(currentSlide - 1);
+            }
+        }
+
+        // Button clicks
+        nextBtn.addEventListener('click', nextSlide);
+        prevBtn.addEventListener('click', prevSlide);
+
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight' || e.key === ' ') {
+                e.preventDefault();
+                nextSlide();
+            } else if (e.key === 'ArrowLeft') {
+                e.preventDefault();
+                prevSlide();
+            } else if (e.key === 'Home') {
+                e.preventDefault();
+                updateSlide(1);
+            } else if (e.key === 'End') {
+                e.preventDefault();
+                updateSlide(totalSlides);
+            }
+        });
+
+        // Touch/swipe support
+        let touchStartX = 0;
+        let touchEndX = 0;
+
+        document.addEventListener('touchstart', (e) => {
+            touchStartX = e.changedTouches[0].screenX;
+        });
+
+        document.addEventListener('touchend', (e) => {
+            touchEndX = e.changedTouches[0].screenX;
+            handleSwipe();
+        });
+
+        function handleSwipe() {
+            const swipeThreshold = 50;
+            const diff = touchStartX - touchEndX;
+
+            if (Math.abs(diff) > swipeThreshold) {
+                if (diff > 0) {
+                    nextSlide();
+                } else {
+                    prevSlide();
+                }
+            }
+        }
+
+        // Initialize
+        updateSlide(1);
+    </script>
+</body>
+</html>

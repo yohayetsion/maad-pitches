@@ -1,0 +1,1314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hawksmoor | Brand Strategy Review — Maad House</title>
+  <link rel="icon" type="image/png" href="https://www.google.com/s2/favicons?domain=thehawksmoor.com&sz=64">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    /* Core Styles */
+    :root {
+      --mh-black: #1a1a1a;
+      --mh-white: #ffffff;
+      --mh-accent: #e63946;
+      --mh-gray-light: #f8f9fa;
+      --mh-gray-medium: #6c757d;
+      --mh-gray-dark: #343a40;
+
+      /* Hawksmoor brand colors */
+      --client-primary: #846A06;
+      --client-dark: #1a1a1a;
+      --client-cream: #F5F3EF;
+      --client-gold-light: #B89B3E;
+
+      --font-heading: 'Playfair Display', Georgia, serif;
+      --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      --slide-padding: 50px;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html, body {
+      height: 100%;
+      font-family: var(--font-body);
+      font-size: 16px;
+      line-height: 1.6;
+      color: var(--mh-black);
+      background: var(--mh-white);
+      overflow: hidden;
+    }
+
+    .deck {
+      width: 100vw;
+      height: 100vh;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .slide {
+      width: 100vw;
+      height: 100vh;
+      padding: var(--slide-padding);
+      display: none;
+      flex-direction: column;
+      position: absolute;
+      top: 0;
+      left: 0;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      overflow-y: auto;
+    }
+
+    .slide.active {
+      display: flex;
+      opacity: 1;
+    }
+
+    /* Slide Types */
+    .slide--title {
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      background: var(--client-dark);
+      color: var(--client-cream);
+    }
+
+    .slide--content {
+      justify-content: flex-start;
+      padding-top: 60px;
+    }
+
+    .slide--dark {
+      background: var(--mh-black);
+      color: var(--mh-white);
+    }
+
+    .slide--accent {
+      background: var(--mh-accent);
+      color: var(--mh-white);
+      justify-content: center;
+      align-items: center;
+    }
+
+    .slide--client {
+      background: var(--client-dark);
+      color: var(--client-cream);
+    }
+
+    /* Typography */
+    h1 {
+      font-family: var(--font-heading);
+      font-size: 3.5rem;
+      font-weight: 600;
+      line-height: 1.1;
+      margin-bottom: 1rem;
+      letter-spacing: -0.01em;
+    }
+
+    h2 {
+      font-family: var(--font-heading);
+      font-size: 2rem;
+      font-weight: 600;
+      line-height: 1.2;
+      margin-bottom: 1rem;
+    }
+
+    h3 {
+      font-size: 1.35rem;
+      font-weight: 600;
+      margin-bottom: 0.75rem;
+    }
+
+    h4 {
+      font-size: 0.85rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      color: var(--mh-gray-medium);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    p {
+      font-size: 1rem;
+      margin-bottom: 0.75rem;
+      max-width: 800px;
+    }
+
+    .subtitle {
+      font-size: 1.1rem;
+      color: var(--mh-gray-medium);
+      font-weight: 400;
+      margin-bottom: 1.5rem;
+    }
+
+    .slide--title .subtitle,
+    .slide--dark .subtitle,
+    .slide--client .subtitle {
+      color: rgba(255,255,255,0.7);
+    }
+
+    ul { margin-left: 1.25rem; margin-bottom: 0.75rem; }
+    li { font-size: 1rem; margin-bottom: 0.35rem; }
+
+    /* Brand Identity Layout - Two Column with Screenshot */
+    .brand-identity-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      height: calc(100vh - 200px);
+      align-items: start;
+    }
+
+    .brand-identity-left {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .brand-identity-right {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    /* Compact Brand Cards */
+    .brand-card-compact {
+      background: var(--mh-gray-light);
+      border-radius: 10px;
+      padding: 16px 20px;
+    }
+
+    .brand-card-compact h4 {
+      font-size: 0.7rem;
+      margin-bottom: 8px;
+    }
+
+    .brand-card-compact p {
+      font-size: 0.9rem;
+      margin-bottom: 0;
+      line-height: 1.5;
+    }
+
+    /* Color Swatches - Compact */
+    .color-swatches {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .color-swatch {
+      width: 36px;
+      height: 36px;
+      border-radius: 6px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.15);
+      position: relative;
+    }
+
+    .color-swatch span {
+      position: absolute;
+      bottom: -16px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 0.55rem;
+      color: var(--mh-gray-medium);
+      white-space: nowrap;
+    }
+
+    /* Screenshot in Identity Slide */
+    .screenshot-small {
+      border-radius: 8px;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+      width: 100%;
+      max-height: 280px;
+      object-fit: cover;
+      object-position: top;
+    }
+
+    .screenshot-wrapper {
+      position: relative;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    .screenshot-label {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: rgba(0,0,0,0.7);
+      color: white;
+      padding: 8px 12px;
+      font-size: 0.75rem;
+    }
+
+    /* Market Context Bullets */
+    .market-bullets {
+      background: var(--mh-gray-light);
+      border-radius: 10px;
+      padding: 16px 20px;
+    }
+
+    .market-bullets h4 {
+      font-size: 0.7rem;
+      margin-bottom: 10px;
+    }
+
+    .market-bullets ul {
+      margin: 0;
+      padding-left: 1rem;
+    }
+
+    .market-bullets li {
+      font-size: 0.85rem;
+      margin-bottom: 6px;
+    }
+
+    /* Two Column - Strengths/Opportunities */
+    .two-column {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      margin-top: 1.5rem;
+    }
+
+    .column h4 { margin-bottom: 0.75rem; font-size: 0.9rem; }
+    .column.strengths h4 { color: #2ecc71; }
+    .column.opportunities h4 { color: var(--mh-accent); }
+
+    /* Competitor Grid - 4 cards */
+    .competitor-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      margin-top: 1.5rem;
+    }
+
+    .competitor-card {
+      background: var(--mh-gray-light);
+      border-radius: 10px;
+      padding: 16px;
+    }
+
+    .competitor-card h4 {
+      color: var(--mh-black);
+      font-size: 0.95rem;
+      text-transform: none;
+      letter-spacing: 0;
+      margin-bottom: 4px;
+    }
+
+    .competitor-card .positioning {
+      font-style: italic;
+      color: var(--mh-gray-medium);
+      font-size: 0.8rem;
+      margin-bottom: 8px;
+    }
+
+    .competitor-card p {
+      font-size: 0.8rem;
+      color: var(--mh-gray-dark);
+      margin-bottom: 0;
+      line-height: 1.45;
+    }
+
+    /* Alternative/Direction Cards */
+    .alternative-number {
+      font-size: 0.75rem;
+      color: var(--mh-gray-medium);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 8px;
+    }
+
+    .positioning-quote {
+      font-style: italic;
+      color: var(--mh-gray-medium);
+      font-size: 1.05rem;
+      margin-bottom: 0.75rem;
+    }
+
+    /* Logo Grid */
+    .logo-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 14px;
+      margin: 1.25rem 0;
+    }
+
+    .logo-option {
+      background: white;
+      border-radius: 10px;
+      padding: 14px;
+      aspect-ratio: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    }
+
+    .logo-option img {
+      max-width: 90%;
+      max-height: 90%;
+      object-fit: contain;
+    }
+
+    /* Brand Grid for Direction slides */
+    .brand-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+      margin-top: 1rem;
+    }
+
+    .brand-card {
+      background: var(--mh-gray-light);
+      border-radius: 10px;
+      padding: 18px;
+    }
+
+    .brand-card h4 {
+      font-size: 0.7rem;
+      margin-bottom: 10px;
+    }
+
+    .brand-card p {
+      font-size: 0.9rem;
+      margin-bottom: 0;
+    }
+
+    /* Before/After Split Layout */
+    .before-after-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      flex: 1;
+      align-items: start;
+      margin-top: 1rem;
+    }
+
+    .before-section, .after-section {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .section-label {
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--mh-gray-medium);
+      margin-bottom: 4px;
+    }
+
+    .section-label.before { color: var(--mh-accent); }
+    .section-label.after { color: #2ecc71; }
+
+    /* Annotated Screenshot */
+    .annotated-screenshot {
+      position: relative;
+      border-radius: 8px;
+      overflow: visible;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.12);
+    }
+
+    .annotated-screenshot img {
+      width: 100%;
+      border-radius: 8px;
+      display: block;
+    }
+
+    .annotation {
+      position: absolute;
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      font-size: 0.75rem;
+      color: var(--mh-accent);
+      font-weight: 500;
+      max-width: 180px;
+    }
+
+    .annotation-number {
+      width: 22px;
+      height: 22px;
+      background: var(--mh-accent);
+      color: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.7rem;
+      font-weight: 700;
+      flex-shrink: 0;
+      box-shadow: 0 2px 6px rgba(230, 57, 70, 0.4);
+    }
+
+    .annotation-text {
+      background: white;
+      padding: 6px 10px;
+      border-radius: 6px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+      line-height: 1.4;
+    }
+
+    /* Wireframe */
+    .wireframe {
+      background: var(--client-dark);
+      border-radius: 8px;
+      padding: 20px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.12);
+      min-height: 300px;
+    }
+
+    .wireframe-row {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 12px;
+      align-items: center;
+    }
+
+    .wireframe-row.nav {
+      justify-content: space-between;
+      padding-bottom: 12px;
+      border-bottom: 1px solid rgba(132, 106, 6, 0.3);
+      margin-bottom: 20px;
+    }
+
+    .wireframe-logo {
+      background: var(--client-primary);
+      color: var(--client-dark);
+      padding: 6px 12px;
+      border-radius: 4px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      font-family: var(--font-heading);
+    }
+
+    .wireframe-nav-items {
+      display: flex;
+      gap: 16px;
+    }
+
+    .wireframe-nav-item {
+      width: 50px;
+      height: 8px;
+      background: rgba(245, 243, 239, 0.3);
+      border-radius: 4px;
+    }
+
+    .wireframe-hero {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      padding: 16px 0;
+    }
+
+    .wireframe-hero-left {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .wireframe-headline {
+      height: 24px;
+      background: var(--client-cream);
+      border-radius: 4px;
+      width: 90%;
+    }
+
+    .wireframe-subhead {
+      height: 12px;
+      background: rgba(245, 243, 239, 0.5);
+      border-radius: 3px;
+      width: 70%;
+    }
+
+    .wireframe-founder {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-top: 8px;
+      padding: 10px;
+      background: rgba(132, 106, 6, 0.2);
+      border-radius: 6px;
+      border-left: 3px solid var(--client-primary);
+    }
+
+    .wireframe-avatar {
+      width: 32px;
+      height: 32px;
+      background: var(--client-primary);
+      border-radius: 50%;
+    }
+
+    .wireframe-founder-text {
+      flex: 1;
+    }
+
+    .wireframe-founder-text div {
+      height: 8px;
+      background: rgba(245, 243, 239, 0.6);
+      border-radius: 3px;
+      margin-bottom: 4px;
+    }
+
+    .wireframe-founder-text div:last-child {
+      width: 60%;
+      margin-bottom: 0;
+    }
+
+    .wireframe-cta {
+      width: 120px;
+      height: 36px;
+      background: var(--client-primary);
+      border-radius: 6px;
+      margin-top: 8px;
+    }
+
+    .wireframe-hero-right {
+      background: rgba(132, 106, 6, 0.15);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 160px;
+    }
+
+    .wireframe-food-label {
+      color: var(--client-cream);
+      font-size: 0.65rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      opacity: 0.6;
+    }
+
+    /* Improvement callouts */
+    .improvement-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-top: 12px;
+    }
+
+    .improvement-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.8rem;
+      color: var(--mh-gray-dark);
+    }
+
+    .improvement-check {
+      width: 20px;
+      height: 20px;
+      background: #2ecc71;
+      color: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.7rem;
+      flex-shrink: 0;
+    }
+
+    @media (max-width: 1200px) {
+      .before-after-layout {
+        grid-template-columns: 1fr;
+        gap: 30px;
+      }
+      .annotation {
+        font-size: 0.65rem;
+        max-width: 140px;
+      }
+      .annotation-number {
+        width: 18px;
+        height: 18px;
+        font-size: 0.6rem;
+      }
+    }
+
+    /* CTA Styles */
+    .cta-content {
+      text-align: center;
+      max-width: 700px;
+    }
+
+    .cta-content h2 { margin-bottom: 1rem; font-size: 2.25rem; }
+
+    .cta-buttons {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      align-items: center;
+      margin-top: 2rem;
+    }
+
+    .cta-button-primary {
+      display: inline-block;
+      background: var(--mh-white);
+      color: var(--mh-accent);
+      padding: 18px 56px;
+      border-radius: 8px;
+      font-size: 1.2rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .cta-button-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 24px rgba(0, 0, 0, 0.25);
+    }
+
+    .cta-or {
+      color: rgba(255,255,255,0.6);
+      font-size: 0.9rem;
+    }
+
+    .cta-button-secondary {
+      display: inline-block;
+      background: transparent;
+      color: var(--mh-white);
+      padding: 14px 40px;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-weight: 500;
+      text-decoration: none;
+      border: 2px solid rgba(255,255,255,0.5);
+      transition: all 0.2s ease;
+    }
+
+    .cta-button-secondary:hover {
+      background: rgba(255,255,255,0.1);
+      border-color: rgba(255,255,255,0.8);
+    }
+
+    /* Navigation */
+    .nav {
+      position: fixed;
+      bottom: 20px;
+      right: 30px;
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      z-index: 100;
+      background: rgba(255,255,255,0.92);
+      padding: 10px 18px;
+      border-radius: 30px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.12);
+    }
+
+    .nav-btn {
+      width: 36px;
+      height: 36px;
+      border: none;
+      border-radius: 50%;
+      background: var(--mh-gray-light);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s ease;
+    }
+
+    .nav-btn:hover { background: var(--mh-gray-medium); color: white; }
+    .nav-btn:disabled { opacity: 0.3; cursor: not-allowed; }
+
+    .slide-counter {
+      font-size: 0.875rem;
+      color: var(--mh-gray-medium);
+      min-width: 60px;
+      text-align: center;
+    }
+
+    /* Progress */
+    .progress {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 4px;
+      background: var(--client-primary);
+      transition: width 0.3s ease;
+      z-index: 101;
+    }
+
+    /* Prepared By */
+    .prepared-by {
+      margin-top: 2rem;
+      font-size: 0.9rem;
+      opacity: 0.7;
+    }
+
+    .prepared-by strong { opacity: 1; }
+
+    /* Client logo */
+    .client-logo-text {
+      font-family: var(--font-heading);
+      font-size: 2.5rem;
+      font-weight: 600;
+      color: var(--client-primary);
+      margin-bottom: 2rem;
+      letter-spacing: 0.05em;
+    }
+
+    /* Responsive */
+    @media (max-width: 1200px) {
+      :root { --slide-padding: 36px; }
+      h1 { font-size: 2.5rem; }
+      h2 { font-size: 1.75rem; }
+      .brand-identity-layout { grid-template-columns: 1fr; }
+      .competitor-grid { grid-template-columns: 1fr 1fr; }
+    }
+
+    @media (max-width: 768px) {
+      :root { --slide-padding: 20px; }
+      h1 { font-size: 2rem; }
+      h2 { font-size: 1.5rem; }
+      .two-column, .competitor-grid { grid-template-columns: 1fr; }
+      .logo-grid { grid-template-columns: repeat(2, 1fr); }
+      .nav { bottom: 16px; padding: 8px 16px; }
+      .cta-buttons { gap: 12px; }
+      .cta-button-primary { padding: 14px 36px; font-size: 1rem; }
+    }
+
+    /* Logo placeholder */
+    .logo-placeholder {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, var(--client-dark) 0%, #2a2a2a 100%);
+      border-radius: 8px;
+      color: var(--client-primary);
+    }
+
+    .logo-placeholder-text {
+      font-family: var(--font-heading);
+      font-size: 1.4rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+    }
+
+    .logo-placeholder-subtitle {
+      font-size: 0.6rem;
+      color: var(--client-cream);
+      opacity: 0.6;
+      margin-top: 4px;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+    }
+  </style>
+</head>
+<body>
+  <div class="progress" id="progress"></div>
+
+  <div class="deck" id="deck">
+
+    <!-- SLIDE 1: Title -->
+    <section class="slide slide--title active">
+      <div class="client-logo-text">HAWKSMOOR</div>
+      <h1>Brand Strategy Review</h1>
+      <p class="subtitle">Positioning | Identity | Direction</p>
+      <div class="prepared-by">
+        Prepared by <strong>Maad House</strong> | February 2026
+      </div>
+    </section>
+
+    <!-- SLIDE 2: Current Brand Identity -->
+    <section class="slide slide--content">
+      <h2>Current Brand Identity</h2>
+      <p class="subtitle">Your visual DNA and market position</p>
+
+      <div class="brand-identity-layout">
+        <!-- Left Column: Visual Elements -->
+        <div class="brand-identity-left">
+          <div class="screenshot-wrapper">
+            <img src="assets/screenshot-current.png" alt="Current Hawksmoor Website" class="screenshot-small">
+            <div class="screenshot-label">thehawksmoor.com</div>
+          </div>
+
+          <div class="brand-card-compact">
+            <h4>Color Palette</h4>
+            <div class="color-swatches">
+              <div class="color-swatch" style="background: #846A06;"><span>#846A06</span></div>
+              <div class="color-swatch" style="background: #1a1a1a;"><span>#1A1A1A</span></div>
+              <div class="color-swatch" style="background: #F5F3EF;"><span>#F5F3EF</span></div>
+              <div class="color-swatch" style="background: #FFFFFF; border: 1px solid #ddd;"><span>#FFFFFF</span></div>
+            </div>
+          </div>
+
+          <div class="brand-card-compact">
+            <h4>Typography</h4>
+            <p><strong>Georgia/Calligraffitti</strong> (headings) + <strong>Adobe Gurmukhi</strong> (body)</p>
+          </div>
+        </div>
+
+        <!-- Right Column: Market Context -->
+        <div class="brand-identity-right">
+          <div class="brand-card-compact">
+            <h4>Key Messaging</h4>
+            <p>"Award-winning steak restaurants serving British pasture-raised beef and sustainable seafood with great cocktail bars."</p>
+          </div>
+
+          <div class="brand-card-compact">
+            <h4>Visual Style</h4>
+            <p>Dark, sophisticated palette with gold accents. Medium energy, professional tone. Food-forward photography. Premium but approachable.</p>
+          </div>
+
+          <div class="market-bullets">
+            <h4>Market Position</h4>
+            <ul>
+              <li>Premium UK steakhouse — British beef focus</li>
+              <li>12+ locations: London, Manchester, Liverpool, Edinburgh, NYC, Chicago</li>
+              <li>B Corp certified, world's first carbon neutral steak group</li>
+              <li>Twice voted Best Sunday Lunch in UK</li>
+            </ul>
+          </div>
+
+          <div class="market-bullets">
+            <h4>Target Customer</h4>
+            <ul>
+              <li>Affluent food enthusiasts (30-55)</li>
+              <li>Values quality, provenance, sustainability</li>
+              <li>Celebration occasions + regular dining</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SLIDE 3: Strengths & Opportunities -->
+    <section class="slide slide--content">
+      <h2>Current State Analysis</h2>
+      <p class="subtitle">What's working and where there's room to grow</p>
+      <div class="two-column">
+        <div class="column strengths">
+          <h4>Strengths</h4>
+          <ul>
+            <li>Genuine premium position — "the best steak" (Times, GQ)</li>
+            <li>Clear British beef differentiation vs. Argentine/US competitors</li>
+            <li>Compelling founder story (Will & Huw, friends since age 11)</li>
+            <li>Strong sustainability credentials (B Corp, carbon neutral)</li>
+            <li>Rare Breeds programme — unique provenance story</li>
+            <li>Multi-location scale without losing quality perception</li>
+            <li>Award-winning cocktail programme</li>
+          </ul>
+        </div>
+        <div class="column opportunities">
+          <h4>Opportunities</h4>
+          <ul>
+            <li>Hero section is promotional — brand story is buried</li>
+            <li>Founder story not visible on homepage</li>
+            <li>Multiple image carousels create visual noise</li>
+            <li>Dense navigation with competing CTAs</li>
+            <li>Typography inconsistency (mixed font families)</li>
+            <li>Sustainability story deserves higher prominence</li>
+            <li>Shop feels separate from main brand experience</li>
+            <li>Mobile navigation could be simplified</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- SLIDE 4: Competitors -->
+    <section class="slide slide--content">
+      <h2>Competitive Landscape</h2>
+      <p class="subtitle">Key players in UK premium steakhouse market</p>
+      <div class="competitor-grid">
+        <div class="competitor-card">
+          <h4>Gaucho</h4>
+          <p class="positioning">"The best Argentinian restaurant"</p>
+          <p>20+ UK locations. Argentine Pampas beef, extensive Malbec list. Dark, moody interiors with leather accents. International glamour positioning.</p>
+        </div>
+        <div class="competitor-card">
+          <h4>Goodman</h4>
+          <p class="positioning">"Great steak, great wine, great people"</p>
+          <p>3 London locations (Mayfair, City, Canary Wharf). On-site dry aging rooms. Multi-origin beef. "Clubhouse" feel for business dining.</p>
+        </div>
+        <div class="competitor-card">
+          <h4>CUT at 45 Park Lane</h4>
+          <p class="positioning">Wolfgang Puck's European debut</p>
+          <p>Single ultra-premium location. Dorchester Collection hotel. Widest cut selection (Wagyu, USDA Prime). Damien Hirst artwork, celebrity chef brand.</p>
+        </div>
+        <div class="competitor-card">
+          <h4>M Restaurant</h4>
+          <p class="positioning">"International steaks from 6 countries"</p>
+          <p>2 London locations. Global beef sourcing (USA, Argentina, Japan, France, South Africa, Australia). High-shine, matt black aesthetics.</p>
+        </div>
+      </div>
+      <p style="margin-top: 1.5rem; font-style: italic; color: var(--mh-gray-medium);">
+        Hawksmoor's differentiator: British beef provenance + sustainability story + founder authenticity
+      </p>
+    </section>
+
+    <!-- SLIDE 5: Direction 1 -->
+    <section class="slide slide--content">
+      <h4 class="alternative-number">Direction 1</h4>
+      <h2>Modern British Steakhouse</h2>
+      <p class="positioning-quote">"The British Steakhouse"</p>
+      <p>Refresh the visual identity with a more contemporary, confident British aesthetic — clean, bold, unapologetically premium. Homepage restructure puts brand story first, promotions second. This is evolution that strengthens without disruption.</p>
+      <div class="logo-grid" style="max-width: 400px;">
+        <div class="logo-option">
+          <div class="logo-placeholder">
+            <span class="logo-placeholder-text">HAWKSMOOR</span>
+            <span class="logo-placeholder-subtitle">Modern Serif</span>
+          </div>
+        </div>
+        <div class="logo-option">
+          <div class="logo-placeholder">
+            <span class="logo-placeholder-text" style="font-weight: 400; letter-spacing: 0.2em;">HAWKSMOOR</span>
+            <span class="logo-placeholder-subtitle">Clean Sans</span>
+          </div>
+        </div>
+      </div>
+      <div class="brand-grid">
+        <div class="brand-card">
+          <h4>Palette</h4>
+          <div class="color-swatches">
+            <div class="color-swatch" style="background: #846A06;"></div>
+            <div class="color-swatch" style="background: #1a1a1a;"></div>
+            <div class="color-swatch" style="background: #F5F3EF;"></div>
+          </div>
+          <p style="margin-top: 8px; font-size: 0.85rem;">Retain gold + charcoal + cream</p>
+        </div>
+        <div class="brand-card">
+          <h4>Typography</h4>
+          <p>Unified modern serif for headlines, clean sans-serif for body. Consistent hierarchy throughout.</p>
+        </div>
+        <div class="brand-card">
+          <h4>Risk Level</h4>
+          <p><strong>Medium</strong> — Requires design refresh but maintains brand equity and recognition.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- SLIDE 6: Direction 2 -->
+    <section class="slide slide--content">
+      <h4 class="alternative-number">Direction 2</h4>
+      <h2>British Stewardship</h2>
+      <p class="positioning-quote">"Guardians of British Beef"</p>
+      <p>Double down on the British farming and sustainability story. Position Hawksmoor as the guardian of British beef heritage — from Rare Breeds programme to carbon neutrality. More prominent founder story, provenance photography showing farms and butchers.</p>
+      <div class="logo-grid" style="max-width: 400px;">
+        <div class="logo-option">
+          <div class="logo-placeholder">
+            <span class="logo-placeholder-text">HAWKSMOOR</span>
+            <span class="logo-placeholder-subtitle">Est. 2006</span>
+          </div>
+        </div>
+        <div class="logo-option">
+          <div class="logo-placeholder" style="background: linear-gradient(135deg, #2d3b2d 0%, #1a2a1a 100%);">
+            <span class="logo-placeholder-text">HAWKSMOOR</span>
+            <span class="logo-placeholder-subtitle">British Beef</span>
+          </div>
+        </div>
+      </div>
+      <div class="brand-grid">
+        <div class="brand-card">
+          <h4>Palette</h4>
+          <div class="color-swatches">
+            <div class="color-swatch" style="background: #846A06;"></div>
+            <div class="color-swatch" style="background: #2d3b2d;"></div>
+            <div class="color-swatch" style="background: #F5F3EF;"></div>
+            <div class="color-swatch" style="background: #8B7355;"></div>
+          </div>
+          <p style="margin-top: 8px; font-size: 0.85rem;">Add sage green + earth tones</p>
+        </div>
+        <div class="brand-card">
+          <h4>Typography</h4>
+          <p>Traditional serif with heritage feel. More editorial, storytelling approach. Farm-to-fork narrative.</p>
+        </div>
+        <div class="brand-card">
+          <h4>Risk Level</h4>
+          <p><strong>Low</strong> — Evolution of existing positioning, clearer differentiation from Argentine/international competitors.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- SLIDE 7: Direction 3 -->
+    <section class="slide slide--content">
+      <h4 class="alternative-number">Direction 3</h4>
+      <h2>The Hawksmoor Experience</h2>
+      <p class="positioning-quote">"Every Meal Worth Remembering"</p>
+      <p>Shift focus from product (steak) to experience (hospitality, atmosphere, people). Lean into the award-winning position and human stories. More lifestyle imagery — celebrations, staff profiles, location-specific storytelling. Emotional connection over product features.</p>
+      <div class="logo-grid" style="max-width: 400px;">
+        <div class="logo-option">
+          <div class="logo-placeholder">
+            <span class="logo-placeholder-text" style="font-style: italic;">Hawksmoor</span>
+            <span class="logo-placeholder-subtitle">Script Warmth</span>
+          </div>
+        </div>
+        <div class="logo-option">
+          <div class="logo-placeholder">
+            <span class="logo-placeholder-text">HAWKSMOOR</span>
+            <span class="logo-placeholder-subtitle">Since 2006</span>
+          </div>
+        </div>
+      </div>
+      <div class="brand-grid">
+        <div class="brand-card">
+          <h4>Palette</h4>
+          <div class="color-swatches">
+            <div class="color-swatch" style="background: #B89B3E;"></div>
+            <div class="color-swatch" style="background: #1a1a1a;"></div>
+            <div class="color-swatch" style="background: #FAF8F5;"></div>
+          </div>
+          <p style="margin-top: 8px; font-size: 0.85rem;">Warmer gold, softer cream</p>
+        </div>
+        <div class="brand-card">
+          <h4>Typography</h4>
+          <p>Warm, approachable typography. Less formal, more inviting. Photography focuses on people, not just plates.</p>
+        </div>
+        <div class="brand-card">
+          <h4>Risk Level</h4>
+          <p><strong>Medium-High</strong> — Less product-focused than competitors. Gift market opportunity but category departure.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- SLIDE 8: Recommendation -->
+    <section class="slide slide--client">
+      <h4 class="alternative-number" style="color: var(--client-primary);">Our Recommendation</h4>
+      <h2>Direction 1: Modern British Steakhouse</h2>
+      <p class="subtitle">With elements from Direction 2 (British heritage/sustainability story)</p>
+      <div style="margin-top: 2rem; max-width: 750px;">
+        <p style="font-size: 1.1rem; line-height: 1.8;">
+          Hawksmoor has built something rare — genuine premium positioning backed by substance. A full rebrand would be unnecessary and risky. Instead, we recommend <strong>refining</strong> the digital experience to match the in-person excellence.
+        </p>
+        <p style="font-size: 1.1rem; line-height: 1.8; margin-top: 1rem;">
+          This means: homepage restructure with brand story first, typography cleanup, stronger sustainability narrative, and the founder story visible where it matters. Your British beef differentiation is your moat against Gaucho and CUT — it deserves a bigger digital stage.
+        </p>
+        <p style="font-size: 1.1rem; line-height: 1.8; margin-top: 1rem;">
+          The result: cleaner, more confident, unmistakably British.
+        </p>
+      </div>
+    </section>
+
+    <!-- SLIDE 9: Logo Exploration -->
+    <section class="slide slide--content">
+      <h4 class="alternative-number">Exploration</h4>
+      <h2>If You'd Consider a Logo Refresh</h2>
+      <p class="subtitle">Concepts aligned with Direction 1: Modern British Steakhouse</p>
+      <p style="max-width: 700px; margin-bottom: 1.5rem; color: var(--mh-gray-medium);">
+        Your current logo works. But if a refresh were ever on the table, here are directions that would feel more contemporary while keeping Hawksmoor's sophisticated warmth:
+      </p>
+      <div class="logo-grid" style="max-width: 800px; grid-template-columns: repeat(4, 1fr); gap: 20px;">
+        <div class="logo-option" style="flex-direction: column; padding: 24px; aspect-ratio: auto;">
+          <div class="logo-placeholder" style="height: 80px; width: 100%;">
+            <span class="logo-placeholder-text" style="font-size: 1.1rem;">HAWKSMOOR</span>
+          </div>
+          <span style="font-size: 0.75rem; color: var(--mh-gray-medium); text-align: center; margin-top: 12px;">Refined serif — elegant, timeless</span>
+        </div>
+        <div class="logo-option" style="flex-direction: column; padding: 24px; aspect-ratio: auto;">
+          <div class="logo-placeholder" style="height: 80px; width: 100%;">
+            <span class="logo-placeholder-text" style="font-size: 1.1rem; font-weight: 400; letter-spacing: 0.15em;">HAWKSMOOR</span>
+          </div>
+          <span style="font-size: 0.75rem; color: var(--mh-gray-medium); text-align: center; margin-top: 12px;">Clean sans — modern confidence</span>
+        </div>
+        <div class="logo-option" style="flex-direction: column; padding: 24px; aspect-ratio: auto;">
+          <div class="logo-placeholder" style="height: 80px; width: 100%;">
+            <span class="logo-placeholder-text" style="font-size: 1rem;">HAWKSMOOR</span>
+            <span class="logo-placeholder-subtitle">LONDON • EST 2006</span>
+          </div>
+          <span style="font-size: 0.75rem; color: var(--mh-gray-medium); text-align: center; margin-top: 12px;">Badge style — heritage focus</span>
+        </div>
+        <div class="logo-option" style="flex-direction: column; padding: 24px; aspect-ratio: auto;">
+          <div class="logo-placeholder" style="height: 80px; width: 100%;">
+            <span class="logo-placeholder-text" style="font-size: 1.1rem; font-style: italic;">Hawksmoor</span>
+          </div>
+          <span style="font-size: 0.75rem; color: var(--mh-gray-medium); text-align: center; margin-top: 12px;">Script warmth — approachable premium</span>
+        </div>
+      </div>
+      <p style="margin-top: 1.5rem; font-size: 0.9rem; color: var(--mh-gray-medium); font-style: italic;">
+        These are directional concepts — any chosen direction would be developed through proper creative exploration.
+      </p>
+    </section>
+
+    <!-- SLIDE 10: Quick Wins -->
+    <section class="slide slide--content" style="padding-top: 40px;">
+      <h2>Quick Wins: Homepage Structure</h2>
+      <p class="subtitle">Actionable improvements to strengthen the first impression</p>
+
+      <div class="before-after-layout">
+        <!-- Before: Annotated Current Site -->
+        <div class="before-section">
+          <div class="section-label before">Current State</div>
+          <div class="annotated-screenshot">
+            <img src="assets/screenshot-current.png" alt="Current Hawksmoor Homepage">
+            <!-- Annotation 1: Hero -->
+            <div class="annotation" style="top: 8%; left: 60%;">
+              <div class="annotation-number">1</div>
+              <div class="annotation-text">Promotional hero — brand story buried below</div>
+            </div>
+            <!-- Annotation 2: Carousel -->
+            <div class="annotation" style="top: 30%; left: -5%;">
+              <div class="annotation-number">2</div>
+              <div class="annotation-text">Multiple carousels create visual noise</div>
+            </div>
+            <!-- Annotation 3: Navigation -->
+            <div class="annotation" style="top: 2%; left: 35%;">
+              <div class="annotation-number">3</div>
+              <div class="annotation-text">Dense navigation with competing CTAs</div>
+            </div>
+            <!-- Annotation 4: Founder -->
+            <div class="annotation" style="top: 65%; left: 55%;">
+              <div class="annotation-number">4</div>
+              <div class="annotation-text">Founder story & sustainability not prominent</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- After: Wireframe Concept -->
+        <div class="after-section">
+          <div class="section-label after">Proposed Structure</div>
+          <div class="wireframe">
+            <!-- Nav -->
+            <div class="wireframe-row nav">
+              <div class="wireframe-logo">HAWKSMOOR</div>
+              <div class="wireframe-nav-items">
+                <div class="wireframe-nav-item"></div>
+                <div class="wireframe-nav-item"></div>
+                <div class="wireframe-nav-item"></div>
+                <div class="wireframe-nav-item"></div>
+              </div>
+            </div>
+            <!-- Hero -->
+            <div class="wireframe-hero">
+              <div class="wireframe-hero-left">
+                <div class="wireframe-headline"></div>
+                <div class="wireframe-subhead"></div>
+                <div class="wireframe-subhead" style="width: 50%;"></div>
+                <!-- Founder Story Entry -->
+                <div class="wireframe-founder">
+                  <div class="wireframe-avatar"></div>
+                  <div class="wireframe-founder-text">
+                    <div style="width: 80%;"></div>
+                    <div></div>
+                  </div>
+                </div>
+                <div class="wireframe-cta"></div>
+              </div>
+              <div class="wireframe-hero-right">
+                <span class="wireframe-food-label">Hero Image</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="improvement-list">
+            <div class="improvement-item">
+              <div class="improvement-check">1</div>
+              <span>Brand story above the fold — promotions below</span>
+            </div>
+            <div class="improvement-item">
+              <div class="improvement-check">2</div>
+              <span>Founder spotlight visible on homepage</span>
+            </div>
+            <div class="improvement-item">
+              <div class="improvement-check">3</div>
+              <span>Simplified navigation — clear hierarchy</span>
+            </div>
+            <div class="improvement-item">
+              <div class="improvement-check">4</div>
+              <span>Single primary CTA: "Book a Table"</span>
+            </div>
+            <div class="improvement-item">
+              <div class="improvement-check">5</div>
+              <span>Rare Breeds + B Corp prominent</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SLIDE 11: CTA -->
+    <section class="slide slide--accent">
+      <div class="cta-content">
+        <h2>Interested in exploring further?</h2>
+        <p style="margin-bottom: 1rem; color: rgba(255,255,255,0.9); font-size: 1.1rem;">
+          This is a starting point. We'd love to understand your goals for the digital experience and see if there's a fit.
+        </p>
+        <div class="cta-buttons">
+          <a href="https://calendly.com/maadhouse/consultation" target="_blank" class="cta-button-primary">
+            Book 15 mins with Reece
+          </a>
+          <span class="cta-or">or</span>
+          <a href="mailto:tim@thehawksmoor.com?cc=hello@maad.house&subject=Hawksmoor%20Brand%20Discussion" class="cta-button-secondary">
+            Reply to This Email
+          </a>
+        </div>
+        <p style="margin-top: 2.5rem; font-size: 0.9rem; color: rgba(255,255,255,0.6);">
+          <a href="https://maad.house" target="_blank" style="color: rgba(255,255,255,0.8); text-decoration: none;">maad.house</a>
+        </p>
+      </div>
+    </section>
+
+  </div>
+
+  <!-- Navigation -->
+  <nav class="nav">
+    <button class="nav-btn" id="prev" aria-label="Previous slide">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <polyline points="15 18 9 12 15 6"></polyline>
+      </svg>
+    </button>
+    <span class="slide-counter"><span id="current">1</span> / <span id="total">11</span></span>
+    <button class="nav-btn" id="next" aria-label="Next slide">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <polyline points="9 18 15 12 9 6"></polyline>
+      </svg>
+    </button>
+  </nav>
+
+  <script>
+    const deck = document.getElementById('deck');
+    const slides = deck.querySelectorAll('.slide');
+    const progress = document.getElementById('progress');
+    const prevBtn = document.getElementById('prev');
+    const nextBtn = document.getElementById('next');
+    const currentEl = document.getElementById('current');
+    const totalEl = document.getElementById('total');
+
+    let currentSlide = 0;
+    const totalSlides = slides.length;
+    totalEl.textContent = totalSlides;
+
+    function updateSlide() {
+      slides.forEach((slide, i) => slide.classList.toggle('active', i === currentSlide));
+      currentEl.textContent = currentSlide + 1;
+      progress.style.width = ((currentSlide + 1) / totalSlides * 100) + '%';
+      prevBtn.disabled = currentSlide === 0;
+      nextBtn.disabled = currentSlide === totalSlides - 1;
+    }
+
+    function goToSlide(n) {
+      currentSlide = Math.max(0, Math.min(n, totalSlides - 1));
+      updateSlide();
+    }
+
+    prevBtn.addEventListener('click', () => goToSlide(currentSlide - 1));
+    nextBtn.addEventListener('click', () => goToSlide(currentSlide + 1));
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight' || e.key === ' ') { e.preventDefault(); goToSlide(currentSlide + 1); }
+      else if (e.key === 'ArrowLeft') { e.preventDefault(); goToSlide(currentSlide - 1); }
+      else if (e.key === 'Home') { e.preventDefault(); goToSlide(0); }
+      else if (e.key === 'End') { e.preventDefault(); goToSlide(totalSlides - 1); }
+    });
+
+    let touchStartX = 0;
+    deck.addEventListener('touchstart', (e) => { touchStartX = e.changedTouches[0].screenX; }, { passive: true });
+    deck.addEventListener('touchend', (e) => {
+      const diff = touchStartX - e.changedTouches[0].screenX;
+      if (Math.abs(diff) > 50) { diff > 0 ? goToSlide(currentSlide + 1) : goToSlide(currentSlide - 1); }
+    }, { passive: true });
+
+    updateSlide();
+  </script>
+</body>
+</html>
