@@ -688,24 +688,26 @@
       border-color: rgba(255,255,255,0.8);
     }
 
-    /* Navigation */
+    /* Navigation - Mobile-First */
     .nav {
       position: fixed;
-      bottom: 20px;
-      right: 30px;
+      bottom: 0;
+      left: 0;
+      right: 0;
       display: flex;
       gap: 12px;
       align-items: center;
+      justify-content: center;
       z-index: 100;
-      background: rgba(255,255,255,0.92);
-      padding: 10px 18px;
-      border-radius: 30px;
-      box-shadow: 0 2px 12px rgba(0,0,0,0.12);
+      background: rgba(255,255,255,0.98);
+      padding: 12px 18px;
+      border-top: 1px solid rgba(0,0,0,0.08);
+      box-shadow: 0 -2px 12px rgba(0,0,0,0.08);
     }
 
     .nav-btn {
-      width: 36px;
-      height: 36px;
+      width: 44px;
+      height: 44px;
       border: none;
       border-radius: 50%;
       background: var(--mh-gray-light);
@@ -714,6 +716,27 @@
       align-items: center;
       justify-content: center;
       transition: background 0.2s ease;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .nav-btn:active { background: var(--mh-gray-dark); color: white; }
+
+    /* Desktop: corner positioning */
+    @media (min-width: 769px) {
+      .nav {
+        bottom: 20px;
+        left: auto;
+        right: 30px;
+        width: auto;
+        border-top: none;
+        border-radius: 30px;
+        box-shadow: 0 2px 12px rgba(0,0,0,0.12);
+        padding: 10px 18px;
+      }
+      .nav-btn {
+        width: 36px;
+        height: 36px;
+      }
     }
 
     .nav-btn:hover { background: var(--mh-gray-medium); color: white; }
@@ -766,14 +789,33 @@
     }
 
     @media (max-width: 768px) {
-      :root { --slide-padding: 20px; }
-      h1 { font-size: 2rem; }
-      h2 { font-size: 1.5rem; }
+      :root { --slide-padding: 16px; }
+      h1 { font-size: 1.75rem; }
+      h2 { font-size: 1.35rem; }
+      h3 { font-size: 1.1rem; }
+      p { font-size: 0.9rem; }
+      li { font-size: 0.9rem; }
       .two-column, .competitor-grid { grid-template-columns: 1fr; }
       .logo-grid { grid-template-columns: repeat(2, 1fr); }
-      .nav { bottom: 16px; padding: 8px 16px; }
       .cta-buttons { gap: 12px; }
-      .cta-button-primary { padding: 14px 36px; font-size: 1rem; }
+      .cta-button-primary { padding: 14px 32px; font-size: 1rem; }
+      .cta-button-secondary { padding: 12px 28px; font-size: 0.9rem; }
+      .slide { padding-bottom: 80px; } /* Space for fixed nav */
+      .slide--accent, .slide--title { padding-bottom: 80px; }
+      .brand-identity-layout { gap: 20px; }
+      .competitor-card { padding: 14px; }
+      .brand-card-compact { padding: 12px 16px; }
+    }
+
+    /* Extra small screens */
+    @media (max-width: 480px) {
+      :root { --slide-padding: 12px; }
+      h1 { font-size: 1.5rem; }
+      h2 { font-size: 1.2rem; }
+      .client-logo-text { font-size: 1.5rem; }
+      .nav { padding: 10px 12px; gap: 8px; }
+      .nav-btn { width: 40px; height: 40px; }
+      .cta-content h2 { font-size: 1.5rem; }
     }
 
     /* Logo placeholder */
@@ -830,7 +872,7 @@
         <!-- Left Column: Visual Elements -->
         <div class="brand-identity-left">
           <div class="screenshot-wrapper">
-            <img src="assets/screenshot-current.png" alt="Current Hawksmoor Website" class="screenshot-small">
+            <img src="https://maad.house/pitches/hawksmoor/assets/image-2.png" alt="Current Hawksmoor Website" class="screenshot-small">
             <div class="screenshot-label">thehawksmoor.com</div>
           </div>
 
@@ -1131,102 +1173,33 @@
     </section>
 
     <!-- SLIDE 10: Quick Wins -->
-    <section class="slide slide--content" style="padding-top: 40px;">
-      <h2>Quick Wins: Homepage Structure</h2>
-      <p class="subtitle">Actionable improvements to strengthen the first impression</p>
-
-      <div class="before-after-layout">
-        <!-- Before: Annotated Current Site -->
-        <div class="before-section">
-          <div class="section-label before">Current State</div>
-          <div class="annotated-screenshot">
-            <img src="assets/screenshot-current.png" alt="Current Hawksmoor Homepage">
-            <!-- Annotation 1: Hero -->
-            <div class="annotation" style="top: 8%; left: 60%;">
-              <div class="annotation-number">1</div>
-              <div class="annotation-text">Promotional hero — brand story buried below</div>
-            </div>
-            <!-- Annotation 2: Carousel -->
-            <div class="annotation" style="top: 30%; left: -5%;">
-              <div class="annotation-number">2</div>
-              <div class="annotation-text">Multiple carousels create visual noise</div>
-            </div>
-            <!-- Annotation 3: Navigation -->
-            <div class="annotation" style="top: 2%; left: 35%;">
-              <div class="annotation-number">3</div>
-              <div class="annotation-text">Dense navigation with competing CTAs</div>
-            </div>
-            <!-- Annotation 4: Founder -->
-            <div class="annotation" style="top: 65%; left: 55%;">
-              <div class="annotation-number">4</div>
-              <div class="annotation-text">Founder story & sustainability not prominent</div>
-            </div>
-          </div>
-        </div>
-
-        <!-- After: Wireframe Concept -->
-        <div class="after-section">
-          <div class="section-label after">Proposed Structure</div>
-          <div class="wireframe">
-            <!-- Nav -->
-            <div class="wireframe-row nav">
-              <div class="wireframe-logo">HAWKSMOOR</div>
-              <div class="wireframe-nav-items">
-                <div class="wireframe-nav-item"></div>
-                <div class="wireframe-nav-item"></div>
-                <div class="wireframe-nav-item"></div>
-                <div class="wireframe-nav-item"></div>
-              </div>
-            </div>
-            <!-- Hero -->
-            <div class="wireframe-hero">
-              <div class="wireframe-hero-left">
-                <div class="wireframe-headline"></div>
-                <div class="wireframe-subhead"></div>
-                <div class="wireframe-subhead" style="width: 50%;"></div>
-                <!-- Founder Story Entry -->
-                <div class="wireframe-founder">
-                  <div class="wireframe-avatar"></div>
-                  <div class="wireframe-founder-text">
-                    <div style="width: 80%;"></div>
-                    <div></div>
-                  </div>
-                </div>
-                <div class="wireframe-cta"></div>
-              </div>
-              <div class="wireframe-hero-right">
-                <span class="wireframe-food-label">Hero Image</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="improvement-list">
-            <div class="improvement-item">
-              <div class="improvement-check">1</div>
-              <span>Brand story above the fold — promotions below</span>
-            </div>
-            <div class="improvement-item">
-              <div class="improvement-check">2</div>
-              <span>Founder spotlight visible on homepage</span>
-            </div>
-            <div class="improvement-item">
-              <div class="improvement-check">3</div>
-              <span>Simplified navigation — clear hierarchy</span>
-            </div>
-            <div class="improvement-item">
-              <div class="improvement-check">4</div>
-              <span>Single primary CTA: "Book a Table"</span>
-            </div>
-            <div class="improvement-item">
-              <div class="improvement-check">5</div>
-              <span>Rare Breeds + B Corp prominent</span>
-            </div>
-          </div>
-        </div>
+    <section class="slide slide--content" style="padding-top: 60px;">
+      <h2>Quick Wins</h2>
+      <p class="subtitle">Actionable improvements we can implement quickly</p>
+      
+      <div style="max-width: 800px; margin: 40px auto;">
+        <ul style="list-style: none; padding: 0;">
+          <li style="padding: 20px 24px; background: rgba(0,0,0,0.02); border-radius: 8px; margin-bottom: 16px; border-left: 4px solid var(--mh-coral, #E8614D);">
+            <strong style="color: var(--mh-charcoal, #2D3436);">Lead with the story, not promotions</strong>
+            <p style="margin: 8px 0 0; color: var(--mh-gray-dark, #636E72); font-size: 0.95rem;">Move brand heritage and founder story above the fold where visitors land</p>
+          </li>
+          <li style="padding: 20px 24px; background: rgba(0,0,0,0.02); border-radius: 8px; margin-bottom: 16px; border-left: 4px solid var(--mh-coral, #E8614D);">
+            <strong style="color: var(--mh-charcoal, #2D3436);">Simplify the navigation</strong>
+            <p style="margin: 8px 0 0; color: var(--mh-gray-dark, #636E72); font-size: 0.95rem;">Reduce competing CTAs and create a clear path to booking</p>
+          </li>
+          <li style="padding: 20px 24px; background: rgba(0,0,0,0.02); border-radius: 8px; margin-bottom: 16px; border-left: 4px solid var(--mh-coral, #E8614D);">
+            <strong style="color: var(--mh-charcoal, #2D3436);">Remove carousel clutter</strong>
+            <p style="margin: 8px 0 0; color: var(--mh-gray-dark, #636E72); font-size: 0.95rem;">Replace rotating banners with focused, static content that converts</p>
+          </li>
+          <li style="padding: 20px 24px; background: rgba(0,0,0,0.02); border-radius: 8px; margin-bottom: 16px; border-left: 4px solid var(--mh-coral, #E8614D);">
+            <strong style="color: var(--mh-charcoal, #2D3436);">Showcase sustainability credentials</strong>
+            <p style="margin: 8px 0 0; color: var(--mh-gray-dark, #636E72); font-size: 0.95rem;">Make your ethical sourcing and practices visible to values-driven diners</p>
+          </li>
+        </ul>
       </div>
     </section>
 
-    <!-- SLIDE 11: CTA -->
+<!-- SLIDE 11: CTA -->
     <section class="slide slide--accent">
       <div class="cta-content">
         <h2>Interested in exploring further?</h2>
@@ -1235,11 +1208,7 @@
         </p>
         <div class="cta-buttons">
           <a href="https://calendly.com/maadhouse/consultation" target="_blank" class="cta-button-primary">
-            Book 15 mins with Reece
-          </a>
-          <span class="cta-or">or</span>
-          <a href="mailto:tim@thehawksmoor.com?cc=hello@maad.house&subject=Hawksmoor%20Brand%20Discussion" class="cta-button-secondary">
-            Reply to This Email
+            Book 30 mins with Reece
           </a>
         </div>
         <p style="margin-top: 2.5rem; font-size: 0.9rem; color: rgba(255,255,255,0.6);">

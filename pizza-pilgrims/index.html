@@ -144,21 +144,25 @@
             margin-bottom: 0.5rem;
         }
 
-        /* Navigation */
+        /* Navigation - Mobile-First */
         .nav {
             position: fixed;
-            bottom: 30px;
-            left: 50%;
-            transform: translateX(-50%);
+            bottom: 0;
+            left: 0;
+            right: 0;
             display: flex;
             gap: 15px;
             align-items: center;
+            justify-content: center;
             z-index: 100;
+            background: rgba(0,0,0,0.85);
+            padding: 12px 18px;
+            border-top: 1px solid rgba(255,255,255,0.1);
         }
 
         .nav-btn {
-            width: 50px;
-            height: 50px;
+            width: 44px;
+            height: 44px;
             border-radius: 50%;
             border: 2px solid rgba(255,255,255,0.3);
             background: rgba(0,0,0,0.3);
@@ -168,11 +172,31 @@
             align-items: center;
             justify-content: center;
             transition: all 0.3s ease;
+            -webkit-tap-highlight-color: transparent;
         }
 
-        .nav-btn:hover {
+        .nav-btn:hover, .nav-btn:active {
             background: var(--mh-accent);
             border-color: var(--mh-accent);
+        }
+
+        /* Desktop: centered pill */
+        @media (min-width: 769px) {
+            .nav {
+                bottom: 30px;
+                left: 50%;
+                right: auto;
+                transform: translateX(-50%);
+                width: auto;
+                background: rgba(0,0,0,0.5);
+                border-top: none;
+                border-radius: 50px;
+                padding: 0.75rem 1.5rem;
+            }
+            .nav-btn {
+                width: 50px;
+                height: 50px;
+            }
         }
 
         .nav-btn svg {
@@ -819,12 +843,16 @@
 
         @media (max-width: 768px) {
             .slide {
-                padding: 30px;
+                padding: 30px 20px 80px;
             }
 
             h1 {
                 font-size: 2.25rem;
             }
+
+            h2 { font-size: 1.75rem; }
+            h3 { font-size: 1.25rem; }
+            p { font-size: 0.95rem; }
 
             .strengths-grid {
                 grid-template-columns: 1fr;
@@ -851,6 +879,14 @@
             .annotation::before {
                 display: none;
             }
+        }
+
+        @media (max-width: 480px) {
+            h1 { font-size: 1.75rem; }
+            h2 { font-size: 1.5rem; }
+            .slide { padding: 20px 16px 80px; }
+            .nav { padding: 10px 12px; gap: 8px; }
+            .nav-btn { width: 40px; height: 40px; }
         }
     </style>
 </head>
@@ -1216,46 +1252,43 @@
             </p>
         </div>
 
-        <!-- Slide 10: Quick Wins -->
+                <!-- Slide 10: Quick Wins -->
         <div class="slide slide--dark" data-slide="10">
             <p class="label" style="margin-bottom: 20px;">Immediate Impact</p>
             <h2 style="margin-bottom: 40px;">Quick Wins</h2>
 
-            <div class="annotated-container">
-                <img src="https://storage.googleapis.com/firecrawl-scrape-media/screenshot-e6478496-2270-4fc3-af0f-fd5f593eb586.png" alt="Pizza Pilgrims Homepage Annotated" class="annotated-screenshot">
-
-                <div class="annotation annotation--1">
-                    <strong>Hero Story</strong><br>
-                    Lead with the pilgrimage narrative, not promotions
-                </div>
-
-                <div class="annotation annotation--2">
-                    <strong>Single Primary CTA</strong><br>
-                    Reduce competing calls to action
-                </div>
-
-                <div class="annotation annotation--3">
-                    <strong>Premium Photography</strong><br>
-                    Invest in consistent, elevated food imagery
-                </div>
-
-                <div class="annotation annotation--4">
-                    <strong>Founder Visibility</strong><br>
-                    Thom & James should be above the fold
-                </div>
+            <div style="max-width: 800px; margin: 0 auto;">
+                <ul style="list-style: none; padding: 0;">
+                    <li style="padding: 20px 24px; background: rgba(255,255,255,0.05); border-radius: 8px; margin-bottom: 16px; border-left: 4px solid var(--pp-bright-green, #00CC00);">
+                        <strong style="color: white;">Lead with the pilgrimage story</strong>
+                        <p style="margin: 8px 0 0; color: rgba(255,255,255,0.8); font-size: 0.95rem;">The journey from Naples should be the first thing visitors see</p>
+                    </li>
+                    <li style="padding: 20px 24px; background: rgba(255,255,255,0.05); border-radius: 8px; margin-bottom: 16px; border-left: 4px solid var(--pp-bright-green, #00CC00);">
+                        <strong style="color: white;">Single primary CTA</strong>
+                        <p style="margin: 8px 0 0; color: rgba(255,255,255,0.8); font-size: 0.95rem;">Reduce competing calls to action - one clear path to order or book</p>
+                    </li>
+                    <li style="padding: 20px 24px; background: rgba(255,255,255,0.05); border-radius: 8px; margin-bottom: 16px; border-left: 4px solid var(--pp-bright-green, #00CC00);">
+                        <strong style="color: white;">Elevate the photography</strong>
+                        <p style="margin: 8px 0 0; color: rgba(255,255,255,0.8); font-size: 0.95rem;">Invest in consistent, premium food imagery that matches your brand</p>
+                    </li>
+                    <li style="padding: 20px 24px; background: rgba(255,255,255,0.05); border-radius: 8px; margin-bottom: 16px; border-left: 4px solid var(--pp-bright-green, #00CC00);">
+                        <strong style="color: white;">Put Thom & James above the fold</strong>
+                        <p style="margin: 8px 0 0; color: rgba(255,255,255,0.8); font-size: 0.95rem;">Your founders are your differentiator - make them visible</p>
+                    </li>
+                </ul>
             </div>
         </div>
 
-        <!-- Slide 11: CTA -->
+<!-- Slide 11: CTA -->
         <div class="slide slide--client" data-slide="11">
             <div class="cta-content">
                 <h1>Let's elevate the pilgrimage together</h1>
                 <p>We'd love to explore how Maad House can help Pizza Pilgrims evolve while staying true to Thom and James's original vision.</p>
 
-                <a href="mailto:hello@maad.house" class="cta-button">Start the Conversation</a>
+                <a href="https://calendly.com/maadhouse/consultation" class="cta-button">Book 30 mins with Reece</a>
 
                 <div class="cta-contact">
-                    <p>hello@maad.house | maad.house</p>
+                    <p>maad.house</p>
                 </div>
             </div>
         </div>
